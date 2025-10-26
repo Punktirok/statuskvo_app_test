@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #0f172a;
+  background-color: #f3f3f8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f3f3f8;
+}
+
+#root {
+  min-height: 100vh;
+}
+/* кастомный утилити-класс для смещения разделителя */
+.divide-y > * + * {
+  position: relative;
+  border-bottom: none !important; /* 🧠 отключаем стандартную линию Tailwind */
+}
+.divide-y > * + *::before {
+  content: "";
+  position: absolute;
+  left: var(--tw-divide-x-offset, 0px);
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: rgb(0 0 0 / 0.1);
+}
+.custom-divide > * {
+  position: relative;
+}
+
+.custom-divide > *::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: var(--divide-offset, 33px);
+  right: 0;
+  height: 1px;
+  background-color: rgb(0 0 0 / 0.1);
+}
+
+/* 👇 убираем линию у последнего элемента */
+.custom-divide > *:last-child::after {
+  content: none;
+}
