@@ -63,20 +63,15 @@ function CategoryScreen() {
     }
 
     try {
-      if (
-        (targetUrl.startsWith('https://t.me') ||
-          targetUrl.startsWith('tg://')) &&
-        typeof WebApp.openTelegramLink === 'function'
-      ) {
-        WebApp.openTelegramLink(targetUrl)
-      } else if (typeof WebApp.openLink === 'function') {
+      if (typeof WebApp.openLink === 'function') {
         WebApp.openLink(targetUrl, { try_instant_view: false })
-      } else {
-        window.open(targetUrl, '_blank', 'noopener,noreferrer')
+        return
       }
     } catch (_) {
-      window.open(targetUrl, '_blank', 'noopener,noreferrer')
+      // игнорируем и используем резервный способ ниже
     }
+
+    window.open(targetUrl, '_blank', 'noopener,noreferrer')
   }
 
   // Визуальная часть экрана целиком повторяет макет: шапка, поиск и список карточек
