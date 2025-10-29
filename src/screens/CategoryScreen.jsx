@@ -2,16 +2,11 @@
 import { useEffect, useMemo, useState } from 'react'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
+// SDK Telegram, чтобы открывать уроки ссылками внутри мини-приложения
+import WebApp from '@twa-dev/sdk'
 // Готовый компонент строки поиска, который используется в обоих экранах
 import SearchBar from '../components/SearchBar.jsx'
 // Временная функция, имитирующая запрос уроков (позже можно подключить реальное API)
-import WebApp from '@twa-dev/sdk'
-const openLesson = (url) => {
-  if (!url) return
-  // принимает https://t.me/... или https://t.me/c/.../123, и tg://...
-  WebApp.openTelegramLink(url)
-}
-
 import { fetchLessonsByCategory } from '../api/api.js'
 import {
   getInterfaceIcon,
@@ -58,19 +53,44 @@ function CategoryScreen() {
   }, [lessons, searchTerm])
 
   const hasLessons = filteredLessons.length > 0
+  const getLessonUrl = (lesson) =>
+    lesson?.url || lesson?.link || lesson?.href || lesson?.telegramLink
+
+  const handleLessonClick = (lesson) => {
+    const targetUrl = getLessonUrl(lesson)
+    if (!targetUrl) {
+      return
+    }
+
+    try {
+      if (
+        (targetUrl.startsWith('https://t.me') ||
+          targetUrl.startsWith('tg://')) &&
+        typeof WebApp.openTelegramLink === 'function'
+      ) {
+        WebApp.openTelegramLink(targetUrl)
+      } else if (typeof WebApp.openLink === 'function') {
+        WebApp.openLink(targetUrl, { try_instant_view: false })
+      } else {
+        window.open(targetUrl, '_blank', 'noopener,noreferrer')
+      }
+    } catch (_) {
+      window.open(targetUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   // Визуальная часть экрана целиком повторяет макет: шапка, поиск и список карточек
   return (
     <div className="mx-auto flex min-h-screen max-w-sm flex-col bg-surface-primary px-4 pb-12 pt-7">
       {/* Центральная колонка: фон, отступы и скругления совпадают с дизайном мини-аппа */}
-      <div className="flex flex-col gap-7">
+      <div className="flex flex-col gap-3">
         {/* Шапка с кнопкой назад и названием выбранной категории */}
         <header className="relative flex items-center justify-center">
           <button
             type="button"
             aria-label="Назад"
             onClick={() => navigate(-1)}
-            className="absolute left-0  items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="absolute left-0 flex h-[32px] w-[46px] items-center justify-center rounded-full bg-surface-card shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             {backIcon && (
               <img
@@ -95,26 +115,29 @@ function CategoryScreen() {
         />
         {/* Карточка со списком уроков выбранной категории */}
         {hasLessons ? (
-          <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">
-             <div className="custom-divide [--divide-offset:60px]">
-
+          <div className="rounded-[20px] bg-surface-card px-4 py-3 shadow-card">
+            <div className="custom-divide [--divide-offset:60px]">
               {/* Пробегаемся по каждому уроку и выводим его отдельной строкой */}
-              {filteredLessons.map(({ id, title, type }) => {
+              {filteredLessons.map((lesson) => {
+                const { id, title, type } = lesson
                 const iconSrc = getLessonTypeIcon(type)
+                const targetUrl = getLessonUrl(lesson)
+                const isDisabled = !targetUrl
 
                 return (
                   <button
                     key={id}
                     type="button"
-                    onClick={() => openLesson(url)}  // ← вот это
-                    className="flex w-full items-start gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    onClick={() => handleLessonClick(lesson)}
+                    disabled={isDisabled}
+                    className="flex w-full items-start gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {/* Пиктограмма задаёт тип урока: видео, статья, подкаст и т.д. */}
                     {iconSrc && (
                       <img
                         src={iconSrc}
                         alt=""
-                        className="size-12 rounded-1xl"
+                        className="size-12 rounded-2xl"
                         aria-hidden="true"
                       />
                     )}
@@ -127,8 +150,8 @@ function CategoryScreen() {
                       <img
                         src={arrowIcon}
                         alt=""
-                         className="size-3 shrink-0 self-center"
-                          aria-hidden="true"
+                        className="size-3 shrink-0 self-center"
+                        aria-hidden="true"
                       />
                     )}
                   </button>
