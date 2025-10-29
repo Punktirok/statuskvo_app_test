@@ -58,7 +58,7 @@ function HomeScreen() {
 
   // Разметка экрана: контейнеры и карточки повторяют дизайн макета
   return (
-    <div className="mx-auto flex min-h-screen max-w-sm flex-col bg-surface-primary px-4 pb-12 pt-7">
+    <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 pt-3.5 md:max-w-[540px]">
       {/* Основная колонка с отступами, чтобы интерфейс выглядел как в макете */}
       <div className="flex flex-col gap-4">
         {/* Поисковый блок для фильтрации категорий */}

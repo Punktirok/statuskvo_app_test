@@ -63,20 +63,25 @@ function CategoryScreen() {
     }
 
     try {
-      if (typeof WebApp.openLink === 'function') {
+      if (
+        (targetUrl.startsWith('https://t.me') ||
+          targetUrl.startsWith('tg://')) &&
+        typeof WebApp.openTelegramLink === 'function'
+      ) {
+        WebApp.openTelegramLink(targetUrl)
+      } else if (typeof WebApp.openLink === 'function') {
         WebApp.openLink(targetUrl, { try_instant_view: false })
-        return
+      } else {
+        window.open(targetUrl, '_blank', 'noopener,noreferrer')
       }
     } catch (_) {
-      // игнорируем и используем резервный способ ниже
+      window.open(targetUrl, '_blank', 'noopener,noreferrer')
     }
-
-    window.open(targetUrl, '_blank', 'noopener,noreferrer')
   }
 
   // Визуальная часть экрана целиком повторяет макет: шапка, поиск и список карточек
   return (
-    <div className="mx-auto flex min-h-screen max-w-sm flex-col bg-surface-primary px-4 pb-12 pt-7">
+    <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 pt-3.5 md:max-w-[540px]">
       {/* Центральная колонка: фон, отступы и скругления совпадают с дизайном мини-аппа */}
       <div className="flex flex-col gap-3">
         {/* Шапка с кнопкой назад и названием выбранной категории */}
