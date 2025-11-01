@@ -2,8 +2,6 @@
 import { useEffect, useMemo, useState } from 'react'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
-// SDK Telegram, чтобы открывать уроки ссылками внутри мини-приложения
-import WebApp from '@twa-dev/sdk'
 // Готовый компонент строки поиска, который используется в обоих экранах
 import SearchBar from '../components/SearchBar.jsx'
 // Временная функция, имитирующая запрос уроков (позже можно подключить реальное API)
@@ -12,6 +10,10 @@ import {
   getInterfaceIcon,
   getLessonTypeIcon,
 } from '../utils/iconLoader.js'
+import {
+  getLessonUrl,
+  openLessonLink,
+} from '../utils/lessonLink.js'
 
 const backIcon = getInterfaceIcon('iconBack')
 const arrowIcon = getInterfaceIcon('iconArrow')
@@ -53,30 +55,8 @@ function CategoryScreen() {
   }, [lessons, searchTerm])
 
   const hasLessons = filteredLessons.length > 0
-  const getLessonUrl = (lesson) =>
-    lesson?.url || lesson?.link || lesson?.href || lesson?.telegramLink
-
   const handleLessonClick = (lesson) => {
-    const targetUrl = getLessonUrl(lesson)
-    if (!targetUrl) {
-      return
-    }
-
-    try {
-      if (
-        (targetUrl.startsWith('https://t.me') ||
-          targetUrl.startsWith('tg://')) &&
-        typeof WebApp.openTelegramLink === 'function'
-      ) {
-        WebApp.openTelegramLink(targetUrl)
-      } else if (typeof WebApp.openLink === 'function') {
-        WebApp.openLink(targetUrl, { try_instant_view: false })
-      } else {
-        window.open(targetUrl, '_blank', 'noopener,noreferrer')
-      }
-    } catch (_) {
-      window.open(targetUrl, '_blank', 'noopener,noreferrer')
-    }
+    openLessonLink(lesson)
   }
 
   // Визуальная часть экрана целиком повторяет макет: шапка, поиск и список карточек
@@ -130,7 +110,7 @@ function CategoryScreen() {
                     type="button"
                     onClick={() => handleLessonClick(lesson)}
                     disabled={isDisabled}
-                    className="flex w-full items-start gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
+                    className="flex w-full items-center gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {/* Пиктограмма задаёт тип урока: видео, статья, подкаст и т.д. */}
                     {iconSrc && (
@@ -142,7 +122,7 @@ function CategoryScreen() {
                       />
                     )}
                     {/* Название урока — основная информация для пользователя */}
-                    <span className="self-center flex-1 text-base font-medium leading-snug text-text-primary">
+                    <span className="flex-1 text-base font-medium leading-snug text-text-primary line-clamp-3">
                       {title}
                     </span>
                     {/* Стрелка показывает, что элемент можно раскрыть в будущем */}
