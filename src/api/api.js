@@ -49,7 +49,34 @@ const createLessonId = (rawLesson) => {
   return `lesson-${lessonUid}`;
 };
 
-const buildNormalizedLessons = (rawLessonsByCategory = {}) => {
+const toLessonsByCategoryMap = (rawData) => {
+  if (!rawData) {
+    return {}
+  }
+
+  if (Array.isArray(rawData)) {
+    return rawData.reduce((acc, lesson) => {
+      const categoryTitle = normalizeString(lesson.category)
+      if (!categoryTitle) {
+        return acc
+      }
+      if (!acc[categoryTitle]) {
+        acc[categoryTitle] = []
+      }
+      acc[categoryTitle].push(lesson)
+      return acc
+    }, {})
+  }
+
+  if (typeof rawData === 'object') {
+    return rawData
+  }
+
+  return {}
+}
+
+const buildNormalizedLessons = (rawInput) => {
+  const rawLessonsByCategory = toLessonsByCategoryMap(rawInput)
   const result = {};
 
   const addLessonToCategory = (categoryTitle, lesson) => {
@@ -111,9 +138,13 @@ async function loadAllLessons() {
   // ожидаем структуру из n8n:
   // { categories: [...], lessonsByCategory: { [title]: Lesson[] }, timestamp?: number }
 
-  const lessonsByCategory = buildNormalizedLessons(
-    data.lessonsByCategory || {},
-  );
+  const sourcePayload =
+    data.lessonsByCategory ??
+    data.lessons ??
+    data.records ??
+    data;
+
+  const lessonsByCategory = buildNormalizedLessons(sourcePayload);
   return {
     lessonsByCategory,
     timestamp: Date.now(),
