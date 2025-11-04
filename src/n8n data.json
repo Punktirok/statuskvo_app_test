@@ -1,0 +1,763 @@
+[
+  {
+    "lessons": [
+      {
+        "title": "Математика скруглений в дизайне: как рассчитывать, формулы, примеры",
+        "tags": [
+          "лайфхак"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/20",
+        "new": false
+      },
+      {
+        "title": "Дизайним быстрее по принципу 20-80",
+        "tags": [
+          "лайфхак"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/28",
+        "new": false
+      },
+      {
+        "title": "Tilda или обычная вёрстка: как выбирать?",
+        "tags": [
+          "тильда",
+          "разработка"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "Tilda",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/46",
+        "new": false
+      },
+      {
+        "title": "Простой креатив с заголовками",
+        "tags": [
+          "типографика"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/60",
+        "new": false
+      },
+      {
+        "title": "Креативный масштаб визуала",
+        "tags": [
+          "графика"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/98",
+        "new": false
+      },
+      {
+        "title": "Как продуктивно работать с UI‑kit",
+        "tags": [
+          "ux ui"
+        ],
+        "category": "Процесс дизайна",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/123",
+        "new": false
+      },
+      {
+        "title": "Chat GPT + Midjourney для сильного визуала",
+        "tags": [
+          "нейросети",
+          "ии",
+          "графика"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/24",
+        "new": false
+      },
+      {
+        "title": "ИИ‑агент для дизайна: фото, видео, 3D",
+        "tags": [
+          "визуал",
+          "нейросети",
+          "графика"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/39",
+        "new": false
+      },
+      {
+        "title": "Как генерировать look‑a‑like графику",
+        "tags": [
+          "визуал",
+          "нейросети",
+          "ии"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/52",
+        "new": false
+      },
+      {
+        "title": "Figma Make: генерация дизайна и кода",
+        "tags": [
+          "разработка",
+          "ии"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/61",
+        "new": false
+      },
+      {
+        "title": "Векторные иконки через ИИ + плагин",
+        "tags": [
+          "нейросети",
+          "ии"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/67",
+        "new": false
+      },
+      {
+        "title": "Recraft: генерация и основные инструменты",
+        "tags": [
+          "нейросети",
+          "ии",
+          "фон",
+          "фото",
+          "визуал"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/86",
+        "new": false
+      },
+      {
+        "title": "Видео из статичного объекта на Тильде",
+        "tags": [
+          "анимация",
+          "эффект",
+          "tilda"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "Tilda",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/119",
+        "new": false
+      },
+      {
+        "title": "Замена фона в нейросети Qwen (и сравнение с другими)",
+        "tags": [
+          "нейросети",
+          "ии",
+          "фон",
+          "фото",
+          "визуал"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/125",
+        "new": false
+      },
+      {
+        "title": "Как работать в Nano Banana",
+        "tags": [
+          "нейросети",
+          "ии",
+          "фон",
+          "фото",
+          "визуал"
+        ],
+        "category": "Нейросети",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/128",
+        "new": false
+      },
+      {
+        "title": "Эфир со Стасом Новиковым: Sora и Nano Banana в дизайне",
+        "tags": [
+          "нейросети",
+          "ии",
+          "фон",
+          "фото",
+          "визуал"
+        ],
+        "category": "Записи эфиров",
+        "secondCategory": "Нейросети",
+        "type": "iconRec",
+        "url": "https://t.me/c/2801309173/158",
+        "new": false
+      },
+      {
+        "title": "3D мокапы в портфолио на Behance через Jitter",
+        "tags": [
+          "беханс",
+          "презентация"
+        ],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/15",
+        "new": false
+      },
+      {
+        "title": "Адаптивные версии за пару минут через Grid",
+        "tags": [
+          "сетка",
+          "адаптив"
+        ],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/16",
+        "new": false
+      },
+      {
+        "title": "Компоненты в Figma за 10 минут",
+        "tags": [],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/43",
+        "new": false
+      },
+      {
+        "title": "Как делать макеты для печати в Фигме",
+        "tags": [
+          "полиграфия"
+        ],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/76",
+        "new": false
+      },
+      {
+        "title": "Текст по кривой в Фигме без плагинов",
+        "tags": [
+          "типографика",
+          "эффект"
+        ],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/106",
+        "new": false
+      },
+      {
+        "title": "Компоненты в Figma. Уровень 1",
+        "tags": [],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/145",
+        "new": false
+      },
+      {
+        "title": "Компоненты в Figma. Уровень 2",
+        "tags": [],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/151",
+        "new": false
+      },
+      {
+        "title": "Компоненты в Figma. Уровень 3",
+        "tags": [],
+        "category": "Инструменты Figma",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/161",
+        "new": false
+      },
+      {
+        "title": "Подкаст: личный бренд дизайнера: ступень 0. С чего на самом деле всё начинается",
+        "tags": [
+          "развитие",
+          "карьера"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/18",
+        "new": false
+      },
+      {
+        "title": "Глава из книги: Как дизайнеру не загоняться",
+        "tags": [
+          "психология",
+          "голова",
+          "мотивация",
+          "работа"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/21",
+        "new": false
+      },
+      {
+        "title": "Подкаст: почему ты худший заказчик и что с этим делать",
+        "tags": [
+          "портфолио",
+          "голова",
+          "развитие"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/32",
+        "new": false
+      },
+      {
+        "title": "Подкаст: личный бренд дизайнера: ступень 1. Что публиковать в соцсетях",
+        "tags": [
+          "развитие",
+          "карьера"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/84",
+        "new": false
+      },
+      {
+        "title": "Подкаст: как презентовать заказчику решение, а не картинки",
+        "tags": [
+          "клиент",
+          "правки",
+          "работа"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/136",
+        "new": false
+      },
+      {
+        "title": "Глава из книги: Сложные проекты бустят",
+        "tags": [
+          "факапы",
+          "мотивация",
+          "работа"
+        ],
+        "category": "Софт скиллы",
+        "secondCategory": "",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/141",
+        "new": false
+      },
+      {
+        "title": "Mobile first: подход и принципы",
+        "tags": [
+          "ux ui",
+          "мобильный"
+        ],
+        "category": "UX, исследования",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/87",
+        "new": false
+      },
+      {
+        "title": "UX и продуктовые метрики",
+        "tags": [
+          "ux ui"
+        ],
+        "category": "UX, исследования",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/69",
+        "new": false
+      },
+      {
+        "title": "Вебинар: iOS 26: новые паттерны в дизайне",
+        "tags": [
+          "ux ui",
+          "мобильный"
+        ],
+        "category": "UX, исследования",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/77",
+        "new": false
+      },
+      {
+        "title": "А/Б тесты в дизайне",
+        "tags": [
+          "ux ui",
+          "тестирование",
+          "метрики"
+        ],
+        "category": "UX, исследования",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/62",
+        "new": false
+      },
+      {
+        "title": "Как отвечать на вопрос «Расскажите о себе»",
+        "tags": [
+          "собеседование",
+          "резюме",
+          "работа"
+        ],
+        "category": "Фриланс, поиск работы",
+        "secondCategory": "",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/63",
+        "new": false
+      },
+      {
+        "title": "Как мошенничают в найме дизайнеров",
+        "tags": [
+          "мошенники",
+          "карьера",
+          "работа"
+        ],
+        "category": "Фриланс, поиск работы",
+        "secondCategory": "",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/90",
+        "new": false
+      },
+      {
+        "title": "Интервью с Максимом Иониным",
+        "tags": [
+          "удалёнка",
+          "мотивация"
+        ],
+        "category": "Дизайн-сцены",
+        "secondCategory": "",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/25",
+        "new": false
+      },
+      {
+        "title": "Исследования на практике. Екатерина Кустова",
+        "tags": [
+          "ux ui"
+        ],
+        "category": "Дизайн-сцены",
+        "secondCategory": "UX, исследования",
+        "type": "iconRec",
+        "url": "https://t.me/c/2801309173/74",
+        "new": false
+      },
+      {
+        "title": "Поиск клиентов на фрилансе. София Дранкович",
+        "tags": [
+          "развитие",
+          "карьера",
+          "работа"
+        ],
+        "category": "Дизайн-сцены",
+        "secondCategory": "",
+        "type": "iconPodcast",
+        "url": "https://t.me/c/2801309173/95",
+        "new": false
+      },
+      {
+        "title": "Wordstat и Tilda. Вероника Бондаренко",
+        "tags": [
+          "seo",
+          "яндекс"
+        ],
+        "category": "Дизайн-сцены",
+        "secondCategory": "Tilda",
+        "type": "iconArticle",
+        "url": "https://t.me/c/2801309173/149",
+        "new": false
+      },
+      {
+        "title": "Знакомство с интерфейсом Spline",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/92",
+        "new": false
+      },
+      {
+        "title": "Примитивы и основы моделирования",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/92",
+        "new": false
+      },
+      {
+        "title": "Практика моделирования",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/92",
+        "new": false
+      },
+      {
+        "title": "Применение текстур и материалов",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/101",
+        "new": false
+      },
+      {
+        "title": "Создание стилей материалов",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/101",
+        "new": false
+      },
+      {
+        "title": "Моделирование сложных объектов",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/101",
+        "new": false
+      },
+      {
+        "title": "Импорты SVG из Figma для вывода в 3D",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/120",
+        "new": false
+      },
+      {
+        "title": "Основы освещения и окружения",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/120",
+        "new": false
+      },
+      {
+        "title": "Анимация. Работа со States и Events",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/138",
+        "new": false
+      },
+      {
+        "title": "Анимация типа Scroll. Теория",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/138",
+        "new": false
+      },
+      {
+        "title": "Анимация типа Scroll. Практика",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/138",
+        "new": false
+      },
+      {
+        "title": "Физические свойства объектов",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/146",
+        "new": false
+      },
+      {
+        "title": "Анимация с функцией Clone",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/146",
+        "new": false
+      },
+      {
+        "title": "Создание мокапов в Spline",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/164",
+        "new": false
+      },
+      {
+        "title": "Экспорт сцен и оптимизация",
+        "tags": [
+          "3d"
+        ],
+        "category": "Курс по Spline",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/164",
+        "new": false
+      },
+      {
+        "title": "Что с этим дизайном не так? Whoop",
+        "tags": [
+          "ux ui"
+        ],
+        "category": "UX, исследования",
+        "secondCategory": "",
+        "type": "iconVideo",
+        "url": "https://t.me/c/2801309173/159",
+        "new": false
+      },
+      {
+        "title": "Упаковка работ в портфолио: этап 1",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/36",
+        "new": false
+      },
+      {
+        "title": "Упаковка работ в портфолио: этап 2",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/37",
+        "new": false
+      },
+      {
+        "title": "Упаковка работ в портфолио: этап 3",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/40",
+        "new": false
+      },
+      {
+        "title": "Упаковка работ в портфолио: финал",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/44",
+        "new": false
+      },
+      {
+        "title": "Практика Auto layout: этап 1",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "Инструменты Figma",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/110",
+        "new": false
+      },
+      {
+        "title": "Практика Auto layout: этап 2",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "Инструменты Figma",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/112",
+        "new": false
+      },
+      {
+        "title": "Практика Auto layout: этап 3",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "Инструменты Figma",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/115",
+        "new": true
+      },
+      {
+        "title": "Практика Auto layout: финал",
+        "tags": [],
+        "category": "Челленджи",
+        "secondCategory": "",
+        "type": "iconChallenge",
+        "url": "https://t.me/c/2801309173/118",
+        "new": true
+      },
+      {
+        "title": "Антиэфир №1",
+        "tags": [
+          "развитие"
+        ],
+        "category": "Записи эфиров",
+        "secondCategory": "",
+        "type": "iconRec",
+        "url": "https://t.me/c/2801309173/58",
+        "new": true
+      }
+    ],
+    "categories": [
+      "UX, исследования",
+      "Дизайн-сцены",
+      "Записи эфиров",
+      "Инструменты Figma",
+      "Курс по Spline",
+      "Нейросети",
+      "Процесс дизайна",
+      "Софт скиллы",
+      "Фриланс, поиск работы",
+      "Челленджи"
+    ],
+    "ts": 1762266439305
+  }
+]

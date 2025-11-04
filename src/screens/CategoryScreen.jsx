@@ -28,12 +28,29 @@ function CategoryScreen() {
     }
 
     const normalizedTerm = trimmedSearch.toLowerCase()
-    return lessons.filter(({ title = '', tags = [] }) => {
-      const matchesTitle = title.toLowerCase().includes(normalizedTerm)
-      const matchesTags = Array.isArray(tags)
-        && tags.some((tag) => tag.toLowerCase().includes(normalizedTerm))
-      return matchesTitle || matchesTags
-    })
+    const isShortQuery = normalizedTerm.length <= 2
+
+    const textMatches = (text) => {
+      if (!text) return false
+      const tokens = text
+        .toLowerCase()
+        .split(/[\s.,!?:;"'()\[\]{}<>/\\\-]+/u)
+        .filter(Boolean)
+      return tokens.some((token) =>
+        isShortQuery ? token === normalizedTerm : token.includes(normalizedTerm),
+      )
+    }
+
+    const tagsMatch = (tags = []) =>
+      tags.some((tag) =>
+        isShortQuery
+          ? tag === normalizedTerm
+          : tag.includes(normalizedTerm),
+      )
+
+    return lessons.filter(({ title = '', tags = [] }) =>
+      textMatches(title) || tagsMatch(tags),
+    )
   }, [lessons, trimmedSearch])
 
   const emptyMessage = loading

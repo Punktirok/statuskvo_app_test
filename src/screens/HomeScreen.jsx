@@ -66,12 +66,27 @@ function HomeScreen() {
     }
 
     const normalizedTerm = trimmedSearchTerm.toLowerCase()
-    return lessons.filter(({ title = '', tags = [] }) => {
-      const matchesTitle = title.toLowerCase().includes(normalizedTerm)
-      const matchesTags = Array.isArray(tags)
-        && tags.some((tag) => tag.toLowerCase().includes(normalizedTerm))
-      return matchesTitle || matchesTags
-    })
+    const isShortQuery = normalizedTerm.length <= 2
+
+    const tokenize = (text) =>
+      text
+        .toLowerCase()
+        .split(/[\s.,!?:;"'()\[\]{}<>/\\\-]+/u)
+        .filter(Boolean)
+
+    const textMatches = (text) =>
+      tokenize(text).some((token) =>
+        isShortQuery ? token === normalizedTerm : token.includes(normalizedTerm),
+      )
+
+    const tagsMatch = (tags = []) =>
+      tags.some((tag) =>
+        isShortQuery ? tag === normalizedTerm : tag.includes(normalizedTerm),
+      )
+
+    return lessons.filter(({ title = '', tags = [] }) =>
+      textMatches(title) || tagsMatch(tags),
+    )
   }, [lessons, trimmedSearchTerm])
 
   // Открываем экран выбранной категории и передаём её название через адрес страницы

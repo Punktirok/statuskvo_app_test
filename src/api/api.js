@@ -18,18 +18,29 @@ const normalizeString = (value) =>
 
 const parseTags = (tagsValue) => {
   if (Array.isArray(tagsValue)) {
-    return tagsValue.map(normalizeString).filter(Boolean);
+    return tagsValue
+      .map((tag) => normalizeString(tag).toLowerCase())
+      .filter(Boolean);
   }
   if (typeof tagsValue === 'string') {
     return tagsValue
       .split(',')
-      .map(normalizeString)
+      .map((tag) => normalizeString(tag).toLowerCase())
       .filter(Boolean);
   }
   return [];
 };
 
-const isYes = (value) => normalizeString(value).toLowerCase() === 'yes';
+const isYes = (value) => {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+  if (typeof value === 'number') {
+    return value === 1;
+  }
+  const normalized = normalizeString(value).toLowerCase();
+  return normalized === 'yes' || normalized === 'true';
+};
 
 const ensureIconKey = (lesson, categoryTitle) => {
   if (lesson.iconKey) {
