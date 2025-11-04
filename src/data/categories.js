@@ -1,0 +1,15 @@
+export const STATIC_CATEGORIES = [
+  { title: 'Новые уроки', iconKey: 'iconNew' },
+  { title: 'Нейросети', iconKey: 'iconAI' },
+  { title: 'Инструменты Figma', iconKey: 'iconFigma' },
+  { title: 'Процесс дизайна', iconKey: 'iconProcess' },
+  { title: 'Дизайн-системы', iconKey: 'iconDesignSystem' },
+  { title: 'Фриланс, поиск работы', iconKey: 'iconJob' },
+  { title: 'Софт скиллы', iconKey: 'iconSoftSkills' },
+  { title: 'Tilda', iconKey: 'iconTilda' },
+  { title: 'UX, исследования', iconKey: 'iconUX' },
+  { title: 'Курс по Spline', iconKey: 'iconSpline' },
+  { title: 'Челленджи', iconKey: 'iconChallenge' },
+  { title: 'Дизайн-сцены', iconKey: 'iconDesignScene' },
+  { title: 'Записи эфиров', iconKey: 'iconRecs' },
+]

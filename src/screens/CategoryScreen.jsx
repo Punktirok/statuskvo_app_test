@@ -1,65 +1,47 @@
 // Хуки React отвечают за хранение данных и работу с побочными эффектами
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
-// Готовый компонент строки поиска, который используется в обоих экранах
+// Готовые компоненты интерфейса
 import SearchBar from '../components/SearchBar.jsx'
-// Временная функция, имитирующая запрос уроков (позже можно подключить реальное API)
-import { fetchLessonsByCategory } from '../api/api.js'
-import {
-  getInterfaceIcon,
-  getLessonTypeIcon,
-} from '../utils/iconLoader.js'
-import {
-  getLessonUrl,
-  openLessonLink,
-} from '../utils/lessonLink.js'
+import LessonList from '../components/LessonList.jsx'
+// Общий хук данных по урокам
+import { useLessonsByCategory } from '../hooks/useLessons.js'
+// Иконки Telegram адаптированы через SDK
+import { getInterfaceIcon } from '../utils/iconLoader.js'
+import { openLessonLink } from '../utils/lessons.js'
 
 const backIcon = getInterfaceIcon('iconBack')
-const arrowIcon = getInterfaceIcon('iconArrow')
 
 function CategoryScreen() {
   const navigate = useNavigate()
   const { categoryName = '' } = useParams()
   const decodedCategoryName = decodeURIComponent(categoryName)
-  // Список уроков для выбранной категории
-  const [lessons, setLessons] = useState([])
-  // Текст, который вводит пользователь в поле поиска уроков
+  const { lessons, loading } = useLessonsByCategory(decodedCategoryName)
   const [searchTerm, setSearchTerm] = useState('')
 
-  useEffect(() => {
-    let isMounted = true
+  const trimmedSearch = searchTerm.trim()
 
-    // Обновляем список уроков, как только пользователь открывает новую категорию
-    fetchLessonsByCategory(decodedCategoryName).then((data) => {
-      if (isMounted) {
-        setLessons(data)
-      }
-    })
-
-    return () => {
-      isMounted = false
-    }
-  }, [decodedCategoryName])
-
-  // Ограничиваем уроки по запросу из поиска, чтобы показывать только подходящие
   const filteredLessons = useMemo(() => {
-    if (!searchTerm.trim()) {
+    if (!trimmedSearch) {
       return lessons
     }
 
-    const normalizedTerm = searchTerm.toLowerCase()
-    return lessons.filter(({ title }) =>
-      title.toLowerCase().includes(normalizedTerm),
-    )
-  }, [lessons, searchTerm])
+    const normalizedTerm = trimmedSearch.toLowerCase()
+    return lessons.filter(({ title = '', tags = [] }) => {
+      const matchesTitle = title.toLowerCase().includes(normalizedTerm)
+      const matchesTags = Array.isArray(tags)
+        && tags.some((tag) => tag.toLowerCase().includes(normalizedTerm))
+      return matchesTitle || matchesTags
+    })
+  }, [lessons, trimmedSearch])
 
-  const hasLessons = filteredLessons.length > 0
-  const handleLessonClick = (lesson) => {
-    openLessonLink(lesson)
-  }
+  const emptyMessage = loading
+    ? 'Загружаем уроки...'
+    : trimmedSearch
+      ? 'Ничего не найдено. Попробуйте другой запрос.'
+      : 'Скоро тут появятся уроки'
 
-  // Визуальная часть экрана целиком повторяет макет: шапка, поиск и список карточек
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 pt-3.5 md:max-w-[540px]">
       {/* Центральная колонка: фон, отступы и скругления совпадают с дизайном мини-аппа */}
@@ -93,58 +75,12 @@ function CategoryScreen() {
           onChange={setSearchTerm}
           className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
         />
-        {/* Карточка со списком уроков выбранной категории */}
-        {hasLessons ? (
-          <div className="rounded-[20px] bg-surface-card px-4 py-3 shadow-card">
-            <div className="custom-divide [--divide-offset:60px]">
-              {/* Пробегаемся по каждому уроку и выводим его отдельной строкой */}
-              {filteredLessons.map((lesson) => {
-                const { id, title, type } = lesson
-                const iconSrc = getLessonTypeIcon(type)
-                const targetUrl = getLessonUrl(lesson)
-                const isDisabled = !targetUrl
 
-                return (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => handleLessonClick(lesson)}
-                    disabled={isDisabled}
-                    className="flex w-full items-center gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {/* Пиктограмма задаёт тип урока: видео, статья, подкаст и т.д. */}
-                    {iconSrc && (
-                      <img
-                        src={iconSrc}
-                        alt=""
-                        className="size-12 rounded-2xl"
-                        aria-hidden="true"
-                      />
-                    )}
-                    {/* Название урока — основная информация для пользователя */}
-                    <span className="flex-1 text-base font-medium leading-snug text-text-primary line-clamp-3">
-                      {title}
-                    </span>
-                    {/* Стрелка показывает, что элемент можно раскрыть в будущем */}
-                    {arrowIcon && (
-                      <img
-                        src={arrowIcon}
-                        alt=""
-                        className="size-3 shrink-0 self-center"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-        ) : (
-          <div className="rounded-[20px] bg-surface-card px-4 py-6 text-center text-sm text-text-secondary shadow-card">
-            {/* Плашка-заглушка, если уроки для категории не найдены */}
-            Скоро тут появятся уроки
-          </div>
-        )}
+        <LessonList
+          lessons={filteredLessons}
+          onLessonClick={openLessonLink}
+          emptyMessage={emptyMessage}
+        />
       </div>
     </div>
   )

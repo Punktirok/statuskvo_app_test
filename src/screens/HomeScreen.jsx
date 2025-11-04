@@ -2,21 +2,16 @@
 import { useEffect, useMemo, useState } from 'react'
 // Позволяет переключаться между экранами без перезагрузки страницы
 import { useNavigate } from 'react-router-dom'
-// Повторно используемая строка поиска
+// Повторно используемые компоненты
 import SearchBar from '../components/SearchBar.jsx'
-// Временные функции, которые возвращают категории и уроки (позже заменим на API)
-import { fetchAllLessons, fetchCategories } from '../api/api.js'
+import LessonList from '../components/LessonList.jsx'
+// Работа с данными
+import { fetchCategories } from '../api/api.js'
+import { useAllLessons } from '../hooks/useLessons.js'
 // Утилита для подстановки нужных иконок по имени файла
-import {
-  getCategoryIcon,
-  getInterfaceIcon,
-  getLessonTypeIcon,
-} from '../utils/iconLoader.js'
+import { getCategoryIcon, getInterfaceIcon } from '../utils/iconLoader.js'
 // Открытие уроков в Telegram (или браузере) по клику
-import {
-  getLessonUrl,
-  openLessonLink,
-} from '../utils/lessonLink.js'
+import { openLessonLink } from '../utils/lessons.js'
 
 const arrowIcon = getInterfaceIcon('iconArrow')
 
@@ -24,8 +19,8 @@ function HomeScreen() {
   const navigate = useNavigate()
   // Сохраняем полный список категорий, который получаем из временного API
   const [categories, setCategories] = useState([])
-  // Сохраняем плоский список уроков для глобального поиска по ним
-  const [lessons, setLessons] = useState([])
+  // Используем общий хук с кэшированием уроков
+  const { lessons, loading: lessonsLoading } = useAllLessons()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -33,14 +28,13 @@ function HomeScreen() {
     let isMounted = true
 
     // Получаем данные и сохраняем в состоянии, чтобы отрисовать список на экране
-    Promise.all([fetchCategories(), fetchAllLessons()])
-      .then(([categoryData, lessonData]) => {
+    fetchCategories()
+      .then((categoryData) => {
         if (!isMounted) {
           return
         }
 
         setCategories(categoryData)
-        setLessons(lessonData)
       })
       .catch(() => {
         // В случае ошибки просто оставляем предыдущие данные, чтобы интерфейс продолжил работать
@@ -72,9 +66,12 @@ function HomeScreen() {
     }
 
     const normalizedTerm = trimmedSearchTerm.toLowerCase()
-    return lessons.filter(({ title }) =>
-      title?.toLowerCase().includes(normalizedTerm),
-    )
+    return lessons.filter(({ title = '', tags = [] }) => {
+      const matchesTitle = title.toLowerCase().includes(normalizedTerm)
+      const matchesTags = Array.isArray(tags)
+        && tags.some((tag) => tag.toLowerCase().includes(normalizedTerm))
+      return matchesTitle || matchesTags
+    })
   }, [lessons, trimmedSearchTerm])
 
   // Открываем экран выбранной категории и передаём её название через адрес страницы
@@ -84,7 +81,9 @@ function HomeScreen() {
 
   const hasCategories = filteredCategories.length > 0
   const hasSearch = Boolean(trimmedSearchTerm)
-  const hasLessonResults = lessonResults.length > 0
+  const searchEmptyMessage = lessonsLoading
+    ? 'Загружаем уроки...'
+    : 'Ничего не найдено. Попробуйте другой запрос.'
   // Отдельно выделяем первую категорию для крупной карточки
   const primaryCategory = hasCategories ? filteredCategories[0] : null
   // Остальные категории собираем в группы
@@ -103,63 +102,12 @@ function HomeScreen() {
         />
 
         {hasSearch ? (
-          <div className="rounded-[20px] bg-surface-card px-4 py-3 shadow-card">
-            <div className="custom-divide [--divide-offset:60px]">
-              {/* Результаты поиска по урокам, отображаем списком */}
-              {hasLessonResults ? (
-                lessonResults.map((lesson) => {
-                  const { id, title, type, categoryTitle } = lesson
-                  const lessonIcon = type ? getLessonTypeIcon(type) : null
-                  const categoryIcon = lesson?.iconKey
-                    ? getCategoryIcon(lesson.iconKey)
-                    : null
-                  const lessonUrl = getLessonUrl(lesson)
-                  const isDisabled = !lessonUrl
-
-                  return (
-                    <button
-                      key={id ?? `${title}-${categoryTitle}`}
-                      type="button"
-                      onClick={() => openLessonLink(lesson)}
-                      disabled={isDisabled}
-                      className="flex w-full items-center gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {(lessonIcon || categoryIcon) && (
-                        <img
-                          src={lessonIcon || categoryIcon}
-                          alt=""
-                          className="size-12 rounded-2xl"
-                          aria-hidden="true"
-                        />
-                      )}
-                      <span className="flex-1 text-left">
-                        <span className="block text-base font-medium leading-snug text-text-primary line-clamp-3">
-                          {title}
-                        </span>
-                        {categoryTitle && (
-                          <span className="mt-1 block text-sm font-medium" style={{ color: '#9F9F9F' }}>
-                            {categoryTitle}
-                          </span>
-                        )}
-                      </span>
-                      {arrowIcon && (
-                        <img
-                          src={arrowIcon}
-                          alt=""
-                          className="mt-1 size-3 shrink-0"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </button>
-                  )
-                })
-              ) : (
-                <div className="py-6 text-center text-sm text-text-secondary">
-                  Ничего не найдено. Попробуйте другой запрос.
-                </div>
-              )}
-            </div>
-          </div>
+          <LessonList
+            lessons={lessonResults}
+            onLessonClick={openLessonLink}
+            emptyMessage={searchEmptyMessage}
+            showCategoryLabel
+          />
         ) : hasCategories ? (
           <div className="flex flex-col gap-3">
             {/* Первый промо-блок категории */}
@@ -203,7 +151,7 @@ function HomeScreen() {
                 <div className="rounded-[20px] bg-surface-card px-4 py-2 shadow-card">
                 <div className="custom-divide [&>*:last-child]:pb-1.5">
                     {/* Перебираем первые шесть категорий и показываем их построчно */}
-                    {secondaryCategories.slice(0, 6).map(({ title, iconKey }) => {
+                    {secondaryCategories.slice(0, 8).map(({ title, iconKey }) => {
                       const iconSrc = getCategoryIcon(iconKey)
                       return (
                         <button
@@ -242,12 +190,12 @@ function HomeScreen() {
                 </div>
 
                 {/* Дополнительная карточка категорий, если элементов больше */}
-                {secondaryCategories.length > 6 && (
+                {secondaryCategories.length > 8 && (
                   <div className="rounded-[20px] bg-surface-card px-4 py-2 shadow-card">
                     {/* Если категорий много, показываем вторую карточку — пользователю понятно, что это продолжение списка */}
                     <div className="custom-divide [&>*:last-child]:pb-1.5">
                       {/* Остальные категории попадают во вторую группу */}
-                      {secondaryCategories.slice(6).map(({ title, iconKey }) => {
+                      {secondaryCategories.slice(8).map(({ title, iconKey }) => {
                         const iconSrc = getCategoryIcon(iconKey)
                         return (
                           <button
