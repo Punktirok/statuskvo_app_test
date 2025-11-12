@@ -37,5 +37,11 @@ jobs:
           use_https = True
           EOF
 
-      - name: Sync dist to bucket
-        run: s3cmd sync --delete-removed dist/ s3://${{ secrets.YC_BUCKET }}/
+           - name: Sync dist to bucket
+        run: |
+          s3cmd sync \
+            --delete-removed \
+            --guess-mime-type \
+            --no-mime-magic \
+            --acl-public \
+            dist/ s3://${{ secrets.YC_BUCKET }}/
