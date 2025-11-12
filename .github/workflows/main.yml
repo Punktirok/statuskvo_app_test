@@ -1,0 +1,41 @@
+name: Deploy to Yandex Object Storage
+
+on:
+  push:
+    branches: [ main ]  # нужная ветка
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Install s3cmd
+        run: sudo apt-get install -y s3cmd
+
+      - name: Configure s3cmd
+        run: |
+          cat > ~/.s3cfg <<EOF
+          access_key = ${{ secrets.YC_ACCESS_KEY }}
+          secret_key = ${{ secrets.YC_SECRET_KEY }}
+          host_base = storage.yandexcloud.net
+          host_bucket = %(bucket)s.storage.yandexcloud.net
+          signature_v2 = False
+          use_https = True
+          EOF
+
+      - name: Sync dist to bucket
+        run: s3cmd sync --delete-removed dist/ s3://${{ secrets.YC_BUCKET }}/
