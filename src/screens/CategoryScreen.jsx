@@ -28,25 +28,41 @@ function CategoryScreen() {
     }
 
     const normalizedTerm = trimmedSearch.toLowerCase()
+    const sanitizedTerm = normalizedTerm.replace(/[^\p{L}\p{N}]+/gu, '')
+    const hasSanitizedTerm = sanitizedTerm.length >= 2
     const isShortQuery = normalizedTerm.length <= 2
 
-    const textMatches = (text) => {
-      if (!text) return false
-      const tokens = text
+    const tokenize = (text) =>
+      text
         .toLowerCase()
         .split(/[\s.,!?:;"'()\[\]{}<>/\\\-]+/u)
         .filter(Boolean)
-      return tokens.some((token) =>
+
+    const sanitizeValue = (value = '') =>
+      value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
+
+    const textMatches = (text) => {
+      if (!text) return false
+      const tokens = tokenize(text)
+      const tokenMatch = tokens.some((token) =>
         isShortQuery ? token === normalizedTerm : token.includes(normalizedTerm),
       )
+      if (tokenMatch) {
+        return true
+      }
+      return hasSanitizedTerm && sanitizeValue(text).includes(sanitizedTerm)
     }
 
     const tagsMatch = (tags = []) =>
-      tags.some((tag) =>
-        isShortQuery
+      tags.some((tag) => {
+        const tokenMatch = isShortQuery
           ? tag === normalizedTerm
-          : tag.includes(normalizedTerm),
-      )
+          : tag.includes(normalizedTerm)
+        if (tokenMatch) {
+          return true
+        }
+        return hasSanitizedTerm && sanitizeValue(tag).includes(sanitizedTerm)
+      })
 
     return lessons.filter(({ title = '', tags = [] }) =>
       textMatches(title) || tagsMatch(tags),

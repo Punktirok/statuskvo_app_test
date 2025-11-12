@@ -66,6 +66,8 @@ function HomeScreen() {
     }
 
     const normalizedTerm = trimmedSearchTerm.toLowerCase()
+    const sanitizedTerm = normalizedTerm.replace(/[^\p{L}\p{N}]+/gu, '')
+    const hasSanitizedTerm = sanitizedTerm.length >= 2
     const isShortQuery = normalizedTerm.length <= 2
 
     const tokenize = (text) =>
@@ -74,19 +76,50 @@ function HomeScreen() {
         .split(/[\s.,!?:;"'()\[\]{}<>/\\\-]+/u)
         .filter(Boolean)
 
-    const textMatches = (text) =>
-      tokenize(text).some((token) =>
+    const sanitizeValue = (value = '') =>
+      value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
+
+    const textMatches = (text) => {
+      if (!text) return false
+      const tokenMatch = tokenize(text).some((token) =>
         isShortQuery ? token === normalizedTerm : token.includes(normalizedTerm),
       )
+      if (tokenMatch) {
+        return true
+      }
+      return hasSanitizedTerm && sanitizeValue(text).includes(sanitizedTerm)
+    }
 
     const tagsMatch = (tags = []) =>
-      tags.some((tag) =>
-        isShortQuery ? tag === normalizedTerm : tag.includes(normalizedTerm),
-      )
+      tags.some((tag) => {
+        const tokenMatch = isShortQuery
+          ? tag === normalizedTerm
+          : tag.includes(normalizedTerm)
+        if (tokenMatch) {
+          return true
+        }
+        return hasSanitizedTerm && sanitizeValue(tag).includes(sanitizedTerm)
+      })
 
-    return lessons.filter(({ title = '', tags = [] }) =>
-      textMatches(title) || tagsMatch(tags),
-    )
+    const seen = new Set()
+
+    return lessons.filter(({ title = '', tags = [], isPrimaryCategory, baseId }) => {
+      const matches = textMatches(title) || tagsMatch(tags)
+      if (!matches) {
+        return false
+      }
+
+      if (isPrimaryCategory === false) {
+        return false
+      }
+
+      const key = baseId || title
+      if (seen.has(key)) {
+        return false
+      }
+      seen.add(key)
+      return true
+    })
   }, [lessons, trimmedSearchTerm])
 
   // Открываем экран выбранной категории и передаём её название через адрес страницы

@@ -18,9 +18,7 @@ const normalizeString = (value) =>
 
 const parseTags = (tagsValue) => {
   if (Array.isArray(tagsValue)) {
-    return tagsValue
-      .map((tag) => normalizeString(tag).toLowerCase())
-      .filter(Boolean);
+    return tagsValue.map((tag) => normalizeString(tag).toLowerCase()).filter(Boolean);
   }
   if (typeof tagsValue === 'string') {
     return tagsValue
@@ -110,13 +108,19 @@ const buildNormalizedLessons = (rawInput) => {
     lessons.forEach((rawLesson, index) => {
       const baseId = createLessonId(rawLesson);
       const tags = parseTags(rawLesson.tags);
-      const normalizedLesson = {
+      const baseLesson = {
         ...rawLesson,
-        id: `${baseId}__${primaryCategoryTitle || index}`,
+        baseId,
         tags,
+        primaryCategoryTitle,
       };
 
-      addLessonToCategory(primaryCategoryTitle, normalizedLesson);
+      addLessonToCategory(primaryCategoryTitle, {
+        ...baseLesson,
+        id: `${baseId}__${primaryCategoryTitle || index}`,
+        categoryTitle: primaryCategoryTitle,
+        isPrimaryCategory: true,
+      });
 
       const secondaryCategory = normalizeString(rawLesson.secondCategory);
       if (
@@ -124,21 +128,30 @@ const buildNormalizedLessons = (rawInput) => {
         secondaryCategory !== primaryCategoryTitle
       ) {
         addLessonToCategory(secondaryCategory, {
-          ...normalizedLesson,
+          ...baseLesson,
           id: `${baseId}__${secondaryCategory || index}`,
+          categoryTitle: secondaryCategory,
+          isPrimaryCategory: false,
         });
       }
 
       if (isYes(rawLesson.new)) {
         addLessonToCategory(NEW_CATEGORY_TITLE, {
-          ...normalizedLesson,
+          ...baseLesson,
           id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
+          categoryTitle: NEW_CATEGORY_TITLE,
+          isPrimaryCategory: false,
         });
       }
     });
   }
 
-  return result;
+  return Object.fromEntries(
+    Object.entries(result).map(([categoryTitle, lessons]) => [
+      categoryTitle,
+      [...lessons].reverse(),
+    ]),
+  );
 };
 
 // — внутренняя функция: загрузить все уроки из кэша/сети
