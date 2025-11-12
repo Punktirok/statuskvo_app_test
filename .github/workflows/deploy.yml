@@ -2,7 +2,8 @@ name: Deploy to Yandex Object Storage
 
 on:
   push:
-    branches: [ main ]   # нужная ветка
+    branches: [ main ]
+  workflow_dispatch:  # позволяет запускать вручную из GitHub Actions
 
 jobs:
   deploy:
@@ -11,6 +12,22 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.YC_ACCESS_KEY }}" ]; then
+            echo "ERROR: YC_ACCESS_KEY is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.YC_SECRET_KEY }}" ]; then
+            echo "ERROR: YC_SECRET_KEY is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.YC_BUCKET }}" ]; then
+            echo "ERROR: YC_BUCKET is not set"
+            exit 1
+          fi
+          echo "All secrets are set"
 
       - name: Install Node
         uses: actions/setup-node@v4
@@ -44,4 +61,5 @@ jobs:
             --guess-mime-type \
             --no-mime-magic \
             --acl-public \
+            --verbose \
             dist/ s3://${{ secrets.YC_BUCKET }}/
