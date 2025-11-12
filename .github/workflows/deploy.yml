@@ -60,35 +60,64 @@ jobs:
           find dist -type f | head -20
           echo "Total files: $(find dist -type f | wc -l)"
 
-      - name: Upload all files (force update)
+      - name: Clean up incorrect paths
         run: |
-          # Загружаем все файлы с принудительной перезаписью
-          # Используем sync с --force для обновления всех файлов независимо от изменений
-          cd dist
-          s3cmd sync \
-            --delete-removed \
-            --force \
-            --no-check-md5 \
-            --guess-mime-type \
-            --no-mime-magic \
-            --acl-public \
-            --verbose \
-            --exclude='.git*' \
-            ./ s3://${{ secrets.YC_BUCKET }}/
+          # Удаляем папку "." если она была создана при предыдущем деплое
+          echo "Cleaning up incorrect paths..."
+          s3cmd ls -r s3://${{ secrets.YC_BUCKET }}/ 2>/dev/null | awk '{print $4}' | grep -E "s3://.*/\./" | while read -r file; do
+            echo "Deleting incorrect path: $file"
+            s3cmd del "$file" || true
+          done || echo "No incorrect paths found"
+
+      - name: Upload all files to bucket root
+        run: |
+          # Загружаем все файлы из dist в корень бакета с правильными путями
+          echo "Uploading files from dist/ to bucket root..."
           
-          # Принудительно обновляем HTML файлы с заголовками без кеша
-          echo "Force updating HTML files with no-cache headers..."
-          find . -name "*.html" -print0 | while IFS= read -r -d '' file; do
-            echo "Uploading: $file"
+          # Сначала загружаем HTML файлы с заголовками без кеша
+          find dist -name "*.html" -type f | while read -r file; do
+            rel_path="${file#dist/}"
+            echo "Uploading HTML: $rel_path -> s3://${{ secrets.YC_BUCKET }}/$rel_path"
             s3cmd put \
               --force \
               --no-check-md5 \
               --acl-public \
+              --guess-mime-type \
               --add-header='Cache-Control:no-cache, no-store, must-revalidate' \
               --add-header='Pragma:no-cache' \
               --add-header='Expires:0' \
               --verbose \
-              "$file" "s3://${{ secrets.YC_BUCKET }}/$file"
+              "$file" "s3://${{ secrets.YC_BUCKET }}/$rel_path"
+          done
+          
+          # Затем загружаем все остальные файлы
+          find dist -type f ! -name "*.html" | while read -r file; do
+            rel_path="${file#dist/}"
+            echo "Uploading: $rel_path -> s3://${{ secrets.YC_BUCKET }}/$rel_path"
+            s3cmd put \
+              --force \
+              --no-check-md5 \
+              --acl-public \
+              --guess-mime-type \
+              --no-mime-magic \
+              --verbose \
+              "$file" "s3://${{ secrets.YC_BUCKET }}/$rel_path"
+          done
+
+      - name: Delete old files not in dist
+        run: |
+          # Удаляем файлы из бакета, которых нет в dist (но не из папки ".")
+          echo "Checking for files to delete..."
+          s3cmd ls -r s3://${{ secrets.YC_BUCKET }}/ | awk '{print $4}' | sed "s|s3://${{ secrets.YC_BUCKET }}/||" | grep -v "^\./" | while read -r remote_file; do
+            # Пропускаем пустые строки
+            if [ -z "$remote_file" ]; then
+              continue
+            fi
+            local_file="dist/$remote_file"
+            if [ ! -f "$local_file" ]; then
+              echo "Deleting old file: $remote_file"
+              s3cmd del "s3://${{ secrets.YC_BUCKET }}/$remote_file" || true
+            fi
           done
 
       - name: Verify uploaded files
