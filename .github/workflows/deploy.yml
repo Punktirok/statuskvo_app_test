@@ -2,7 +2,7 @@ name: Deploy to Yandex Object Storage
 
 on:
   push:
-    branches: [ main ]  # нужная ветка
+    branches: [ main ]   # нужная ветка
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
         run: npm run build
 
       - name: Install s3cmd
-        run: sudo apt-get install -y s3cmd
+        run: sudo apt-get update && sudo apt-get install -y s3cmd
 
       - name: Configure s3cmd
         run: |
@@ -37,7 +37,7 @@ jobs:
           use_https = True
           EOF
 
-           - name: Sync dist to bucket
+      - name: Sync dist to bucket
         run: |
           s3cmd sync \
             --delete-removed \
