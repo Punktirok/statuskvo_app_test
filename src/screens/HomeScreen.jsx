@@ -142,12 +142,14 @@ function HomeScreen() {
     <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 pt-3.5 md:max-w-[540px]">
       {/* Основная колонка с отступами, чтобы интерфейс выглядел как в макете */}
       <div className="flex flex-col gap-4">
-        {/* Поисковый блок для фильтрации категорий */}
-        <SearchBar
-          value={searchTerm}
-          onChange={setSearchTerm}
-          className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
-        />
+        {/* Фиксированный блок с поиском (как на экране категории) */}
+        <div className="sticky top-0 z-10 -mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
+          <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
+          />
+        </div>
 
         {hasSearch ? (
           <LessonList
