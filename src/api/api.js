@@ -4,13 +4,7 @@ import { STATIC_CATEGORIES } from '../data/categories.js'
 
 // 2) Настройки API и кэша уроков
 const ENDPOINT = 'https://sanya-kvo.up.railway.app/webhook/lessons'; // пример: https://sanya-kvo.up.railway.app/webhook/lessons
-const LS_KEY = 'lessons_cache_v1';
-const TTL_MS = 24 * 60 * 60 * 1000; // максимум сутки
-const REFRESH_HOUR = 10; // по Москве, новые уроки появляются после 10:00
-const REFRESH_MINUTE = 0;
 const NEW_CATEGORY_TITLE = 'Новые уроки';
-
-let runtimeCache = null;
 let lessonUid = 0;
 
 const categoriesIconMap = Object.fromEntries(
@@ -158,54 +152,8 @@ const buildNormalizedLessons = (rawInput) => {
   );
 };
 
-const shouldUseCache = (timestamp) => {
-  if (!timestamp) return false;
-
-  const now = new Date();
-  const cached = new Date(timestamp);
-  if (Number.isNaN(cached.getTime())) {
-    return false;
-  }
-
-  if (now.getTime() - cached.getTime() > TTL_MS) {
-    return false;
-  }
-
-  const refreshBoundary = new Date(now);
-  refreshBoundary.setHours(REFRESH_HOUR, REFRESH_MINUTE, 0, 0);
-
-  if (now >= refreshBoundary) {
-    if (cached < refreshBoundary) {
-      return false;
-    }
-  } else {
-    const prevBoundary = new Date(refreshBoundary);
-    prevBoundary.setDate(prevBoundary.getDate() - 1);
-    if (cached < prevBoundary) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
 // — внутренняя функция: загрузить все уроки из кэша/сети
 async function loadAllLessons() {
-  if (runtimeCache && shouldUseCache(runtimeCache.timestamp)) {
-    return runtimeCache;
-  }
-
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (shouldUseCache(parsed.timestamp)) {
-        runtimeCache = parsed;
-        return runtimeCache;
-      }
-    }
-  } catch (_) {}
-
   const res = await fetch(ENDPOINT, { method: 'GET' });
   if (!res.ok) throw new Error(`API ${res.status}`);
   const data = await res.json();
@@ -223,13 +171,7 @@ async function loadAllLessons() {
     lessonsByCategory,
     timestamp: Date.now(),
   };
-
-  runtimeCache = normalized;
-  try {
-    localStorage.setItem(LS_KEY, JSON.stringify(normalized));
-  } catch (_) {}
-
-  return runtimeCache;
+  return normalized;
 }
 
 // 3) Публичные функции, которые уже используют экраны

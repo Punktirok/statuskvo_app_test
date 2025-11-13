@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 // Повторно используемые компоненты
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
-import DebugLogsPanel from '../components/debug/DebugLogsPanel.jsx'
 // Работа с данными
 import { fetchCategories } from '../api/api.js'
 import { useAllLessons } from '../hooks/useLessons.js'
@@ -24,7 +23,6 @@ function HomeScreen() {
   const { lessons, loading: lessonsLoading } = useAllLessons()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
-  const [debugVisible, setDebugVisible] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -294,17 +292,7 @@ function HomeScreen() {
             Кажется, такого нет
           </div>
         )}
-
-        <button
-          type="button"
-          aria-hidden="true"
-          className="mt-6 h-5 w-full opacity-0"
-          onClick={() => setDebugVisible(true)}
-        >
-          Debug
-        </button>
       </div>
-      <DebugLogsPanel visible={debugVisible} onClose={() => setDebugVisible(false)} />
     </div>
   )
 }
