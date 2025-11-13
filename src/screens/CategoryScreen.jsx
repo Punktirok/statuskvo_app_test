@@ -97,10 +97,9 @@ function CategoryScreen() {
                 />
               )}
             </button>
-            <h1 className="text-base font-semibold tracking-tight text-text-primary md:text-lg">
+            <h1 className="mx-[46px] text-center text-base font-semibold tracking-tight text-text-primary">
               {decodedCategoryName}
             </h1>
-            <span className="size-10 shrink-0" />
           </header>
 
           {/* Поисковая строка для фильтрации уроков */}
