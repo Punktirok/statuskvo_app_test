@@ -1,0 +1,337 @@
+------ File: log-2023-12-21_17-13-00.338.txt ------
+[Postbox] 2025-11-13 12:30:28.753 Did commit final
+[Postbox] 2025-11-13 12:30:28.755 AccountManager: currentAccountId = Optional(TelegramCore.AccountRecordId(rawValue: 4811737896789246978))
+[Postbox] 2025-11-13 12:30:28.755 AccountManager initialization took 6.829977035522461 ms
+[App 1324013024] 2025-11-13 12:30:28.755 isInForeground = false
+[App 1324013024] 2025-11-13 12:30:28.755 isActive = false
+[App 1324013024] 2025-11-13 12:30:28.767 pushRegistry credentials: {length = 32, bytes = 0x6ca10ec8 5bcd0852 83710384 5b3034a2 ... 605ddb22 a90bd0e2 }
+[App 1324013024] 2025-11-13 12:30:28.769 isInForeground = true
+[App 1324013024] 2025-11-13 12:30:28.769 isActive = true
+[App 1324013024] 2025-11-13 12:30:28.776 register for notifications: didRegisterForRemoteNotificationsWithDeviceToken (deviceToken: 3ad6b9bb32037501ce87448cbccb56a087d4c42cd85c0db55792bdfe600286f8)
+[Wakeup] 2025-11-13 12:30:28.801 enableBeginTransactions: true (active)
+[Wakeup] 2025-11-13 12:30:28.801 enableBeginTransactions: true (active)
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/spotlight
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/login-tokens
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/atomic-state
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3134902174
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test2029835224
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3601255806
+[App 63836446] 2025-11-13 12:40:22.405 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/embedded-broadcast-coordination
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type-v2
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/temp
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/notificationsPresentationData.json
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/widgetPresentationData.json
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978
+[App 63836446] 2025-11-13 12:40:22.407 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/calls
+[App 63836446] 2025-11-13 12:40:22.407 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/postbox
+[App 63836446] 2025-11-13 12:40:22.407 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/network-stats
+[App 63836446] 2025-11-13 12:40:22.407 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/group-calls
+[App 63836446] 2025-11-13 12:40:22.407 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/notificationsKey
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/.tempkey
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/logs
+[App 63836446] 2025-11-13 12:40:22.407 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/lockState.json
+[Postbox] 2025-11-13 12:40:22.418 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.418 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.419 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.419 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.420 Did set up cipher
+[Postbox] 2025-11-13 12:40:22.420 Did set up cipher
+[Postbox] 2025-11-13 12:40:22.420 isEncrypted prepare...
+[Postbox] 2025-11-13 12:40:22.420 isEncrypted prepare...
+[Postbox] 2025-11-13 12:40:22.421 isEncrypted prepare done
+[Postbox] 2025-11-13 12:40:22.421 isEncrypted step done
+[Postbox] 2025-11-13 12:40:22.421 Did set up encryption
+[Postbox] 2025-11-13 12:40:22.422 Did set up pragmas
+[Postbox] 2025-11-13 12:40:22.422 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 12:40:22.422 isEncrypted prepare done
+[Postbox] 2025-11-13 12:40:22.422 Did begin transaction
+[Postbox] 2025-11-13 12:40:22.422 Did load tables
+[Postbox] 2025-11-13 12:40:22.422 isEncrypted step done
+[Postbox] 2025-11-13 12:40:22.422 Did commit final
+[Postbox] 2025-11-13 12:40:22.422 Did set up encryption
+[Postbox] 2025-11-13 12:40:22.422 Did set up pragmas
+[Postbox] 2025-11-13 12:40:22.422 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.422 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 12:40:22.422 Did begin transaction
+[Postbox] 2025-11-13 12:40:22.422 Did load tables
+[Postbox] 2025-11-13 12:40:22.422 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.422 Did set up cipher
+[Postbox] 2025-11-13 12:40:22.422 isEncrypted prepare...
+[Postbox] 2025-11-13 12:40:22.422 Did commit final
+[Postbox] 2025-11-13 12:40:22.422 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.423 isEncrypted prepare done
+[Postbox] 2025-11-13 12:40:22.423 isEncrypted step done
+[Postbox] 2025-11-13 12:40:22.423 Did set up encryption
+[Postbox] 2025-11-13 12:40:22.423 Did set up pragmas
+[Postbox] 2025-11-13 12:40:22.423 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 12:40:22.423 Did begin transaction
+[Postbox] 2025-11-13 12:40:22.423 Did load tables
+[Postbox] 2025-11-13 12:40:22.423 Did commit final
+[Postbox] 2025-11-13 12:40:22.423 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 12:40:22.423 Did set up cipher
+[Postbox] 2025-11-13 12:40:22.424 isEncrypted prepare...
+[Postbox] 2025-11-13 12:40:22.424 isEncrypted prepare done
+[Postbox] 2025-11-13 12:40:22.424 isEncrypted step done
+[Postbox] 2025-11-13 12:40:22.424 Did set up encryption
+[Postbox] 2025-11-13 12:40:22.424 Did set up pragmas
+[Postbox] 2025-11-13 12:40:22.424 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 12:40:22.424 Did begin transaction
+[Postbox] 2025-11-13 12:40:22.424 Did load tables
+[Postbox] 2025-11-13 12:40:22.424 Did commit final
+[Postbox] 2025-11-13 12:40:22.424 AccountManager: currentAccountId = Optional(TelegramCore.AccountRecordId(rawValue: 4811737896789246978))
+[Postbox] 2025-11-13 12:40:22.425 AccountManager initialization took 7.478952407836914 ms
+[App 63836446] 2025-11-13 12:40:22.426 isInForeground = false
+[App 63836446] 2025-11-13 12:40:22.426 isActive = false
+[App 63836446] 2025-11-13 12:40:22.428 Already have a cleanup task pending
+[App 63836446] 2025-11-13 12:40:22.443 pushRegistry credentials: {length = 32, bytes = 0x6ca10ec8 5bcd0852 83710384 5b3034a2 ... 605ddb22 a90bd0e2 }
+[App 63836446] 2025-11-13 12:40:22.445 isInForeground = true
+[App 63836446] 2025-11-13 12:40:22.445 isActive = true
+[App 63836446] 2025-11-13 12:40:22.447 register for notifications: didRegisterForRemoteNotificationsWithDeviceToken (deviceToken: 3ad6b9bb32037501ce87448cbccb56a087d4c42cd85c0db55792bdfe600286f8)
+[Wakeup] 2025-11-13 12:40:22.468 enableBeginTransactions: true (active)
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/spotlight
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/login-tokens
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/atomic-state
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3134902174
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db
+[App 3436507114] 2025-11-13 14:39:53.641 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test2029835224
+[App 3436507114] 2025-11-13 14:39:53.642 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db
+[App 3436507114] 2025-11-13 14:39:53.642 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3601255806
+[App 3436507114] 2025-11-13 14:39:53.642 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/embedded-broadcast-coordination
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type-v2
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/temp
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/notificationsPresentationData.json
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/widgetPresentationData.json
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978
+[App 3436507114] 2025-11-13 14:39:53.643 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/calls
+[App 3436507114] 2025-11-13 14:39:53.643 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/postbox
+[App 3436507114] 2025-11-13 14:39:53.643 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/network-stats
+[App 3436507114] 2025-11-13 14:39:53.643 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/group-calls
+[App 3436507114] 2025-11-13 14:39:53.643 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/notificationsKey
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/.tempkey
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/logs
+[App 3436507114] 2025-11-13 14:39:53.643 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/lockState.json
+[Postbox] 2025-11-13 14:39:53.652 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.652 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.653 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.653 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.653 Did set up cipher
+[Postbox] 2025-11-13 14:39:53.654 Did set up cipher
+[Postbox] 2025-11-13 14:39:53.654 isEncrypted prepare...
+[Postbox] 2025-11-13 14:39:53.654 isEncrypted prepare...
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted prepare done
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted step done
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted prepare done
+[Postbox] 2025-11-13 14:39:53.655 Did set up encryption
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted step done
+[Postbox] 2025-11-13 14:39:53.655 Did set up encryption
+[Postbox] 2025-11-13 14:39:53.655 Did set up pragmas
+[Postbox] 2025-11-13 14:39:53.655 Did set up pragmas
+[Postbox] 2025-11-13 14:39:53.655 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 14:39:53.655 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 14:39:53.655 Did begin transaction
+[Postbox] 2025-11-13 14:39:53.655 Did begin transaction
+[Postbox] 2025-11-13 14:39:53.655 Did load tables
+[Postbox] 2025-11-13 14:39:53.655 Did commit final
+[Postbox] 2025-11-13 14:39:53.655 Did load tables
+[Postbox] 2025-11-13 14:39:53.655 Did commit final
+[Postbox] 2025-11-13 14:39:53.655 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.655 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.655 Did set up cipher
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted prepare...
+[Postbox] 2025-11-13 14:39:53.655 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.655 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 14:39:53.655 Did set up cipher
+[Postbox] 2025-11-13 14:39:53.655 isEncrypted prepare...
+[Postbox] 2025-11-13 14:39:53.656 isEncrypted prepare done
+[Postbox] 2025-11-13 14:39:53.656 isEncrypted step done
+[Postbox] 2025-11-13 14:39:53.656 Did set up encryption
+[Postbox] 2025-11-13 14:39:53.656 Did set up pragmas
+[Postbox] 2025-11-13 14:39:53.656 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 14:39:53.656 Did begin transaction
+[Postbox] 2025-11-13 14:39:53.656 Did load tables
+[Postbox] 2025-11-13 14:39:53.656 Did commit final
+[Postbox] 2025-11-13 14:39:53.658 isEncrypted prepare done
+[Postbox] 2025-11-13 14:39:53.658 isEncrypted step done
+[Postbox] 2025-11-13 14:39:53.658 Did set up encryption
+[Postbox] 2025-11-13 14:39:53.658 Did set up pragmas
+[Postbox] 2025-11-13 14:39:53.658 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 14:39:53.658 Did begin transaction
+[Postbox] 2025-11-13 14:39:53.658 Did load tables
+[Postbox] 2025-11-13 14:39:53.658 Did commit final
+[Postbox] 2025-11-13 14:39:53.659 AccountManager: currentAccountId = Optional(TelegramCore.AccountRecordId(rawValue: 4811737896789246978))
+[Postbox] 2025-11-13 14:39:53.659 AccountManager initialization took 7.296085357666016 ms
+[App 3436507114] 2025-11-13 14:39:53.659 isInForeground = false
+[App 3436507114] 2025-11-13 14:39:53.659 isActive = false
+[App 3436507114] 2025-11-13 14:39:53.660 Already have a cleanup task pending
+[App 3436507114] 2025-11-13 14:39:53.674 pushRegistry credentials: {length = 32, bytes = 0x6ca10ec8 5bcd0852 83710384 5b3034a2 ... 605ddb22 a90bd0e2 }
+[App 3436507114] 2025-11-13 14:39:53.675 isInForeground = true
+[App 3436507114] 2025-11-13 14:39:53.675 isActive = true
+[App 3436507114] 2025-11-13 14:39:53.680 register for notifications: didRegisterForRemoteNotificationsWithDeviceToken (deviceToken: 3ad6b9bb32037501ce87448cbccb56a087d4c42cd85c0db55792bdfe600286f8)
+[Wakeup] 2025-11-13 14:39:53.696 enableBeginTransactions: true (active)
+[Wakeup] 2025-11-13 14:39:53.696 enableBeginTransactions: true (active)
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/spotlight
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/login-tokens
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/atomic-state
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3134902174
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test2029835224
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db_test3601255806
+[App 650711284] 2025-11-13 15:02:35.782 metadata: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/embedded-broadcast-coordination
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type-v2
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/temp
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/notificationsPresentationData.json
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/widgetPresentationData.json
+[App 650711284] 2025-11-13 15:02:35.783 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978
+[App 650711284] 2025-11-13 15:02:35.784 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/calls
+[App 650711284] 2025-11-13 15:02:35.784 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/postbox
+[App 650711284] 2025-11-13 15:02:35.784 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/network-stats
+[App 650711284] 2025-11-13 15:02:35.784 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/group-calls
+[App 650711284] 2025-11-13 15:02:35.784 account account-4811737896789246978: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/account-4811737896789246978/notificationsKey
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination-type
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/broadcast-coordination
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/.tempkey
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/logs
+[App 650711284] 2025-11-13 15:02:35.784 root: /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/lockState.json
+[Postbox] 2025-11-13 15:02:35.793 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.793 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.794 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/storage/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.794 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/guard_db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.794 Did set up cipher
+[Postbox] 2025-11-13 15:02:35.794 Did set up cipher
+[Postbox] 2025-11-13 15:02:35.794 isEncrypted prepare...
+[Postbox] 2025-11-13 15:02:35.794 isEncrypted prepare...
+[Postbox] 2025-11-13 15:02:35.796 isEncrypted prepare done
+[Postbox] 2025-11-13 15:02:35.796 isEncrypted step done
+[Postbox] 2025-11-13 15:02:35.796 Did set up encryption
+[Postbox] 2025-11-13 15:02:35.796 Did set up pragmas
+[Postbox] 2025-11-13 15:02:35.796 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 15:02:35.796 Did begin transaction
+[Postbox] 2025-11-13 15:02:35.796 Did load tables
+[Postbox] 2025-11-13 15:02:35.796 Did commit final
+[Postbox] 2025-11-13 15:02:35.796 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.797 isEncrypted prepare done
+[Postbox] 2025-11-13 15:02:35.797 isEncrypted step done
+[Postbox] 2025-11-13 15:02:35.797 Did set up encryption
+[Postbox] 2025-11-13 15:02:35.797 Did set up pragmas
+[Postbox] 2025-11-13 15:02:35.797 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 15:02:35.797 Did begin transaction
+[Postbox] 2025-11-13 15:02:35.797 Did load tables
+[Postbox] 2025-11-13 15:02:35.797 Did commit final
+[Postbox] 2025-11-13 15:02:35.797 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/media/cache-storage/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.797 Instance Postbox.SqliteValueBox opening sqlite at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.797 Did set up cipher
+[Postbox] 2025-11-13 15:02:35.797 isEncrypted prepare...
+[Postbox] 2025-11-13 15:02:35.797 Did open DB at /private/var/mobile/Containers/Shared/AppGroup/7C8F5AEB-8F58-4829-80CC-B1A88CF173D7/telegram-data/accounts-metadata/db/db_sqlite
+[Postbox] 2025-11-13 15:02:35.797 Did set up cipher
+[Postbox] 2025-11-13 15:02:35.797 isEncrypted prepare...
+[Postbox] 2025-11-13 15:02:35.805 isEncrypted prepare done
+[Postbox] 2025-11-13 15:02:35.805 isEncrypted step done
+[Postbox] 2025-11-13 15:02:35.805 Did set up encryption
+[Postbox] 2025-11-13 15:02:35.805 Did set up pragmas
+[Postbox] 2025-11-13 15:02:35.805 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 15:02:35.805 Did begin transaction
+[Postbox] 2025-11-13 15:02:35.805 Did load tables
+[Postbox] 2025-11-13 15:02:35.805 Did commit final
+[Postbox] 2025-11-13 15:02:35.807 isEncrypted prepare done
+[Postbox] 2025-11-13 15:02:35.807 isEncrypted step done
+[Postbox] 2025-11-13 15:02:35.807 Did set up encryption
+[Postbox] 2025-11-13 15:02:35.807 Did set up pragmas
+[Postbox] 2025-11-13 15:02:35.807 Did set up checkpoint_fullfsync
+[Postbox] 2025-11-13 15:02:35.807 Did begin transaction
+[Postbox] 2025-11-13 15:02:35.807 Did load tables
+[Postbox] 2025-11-13 15:02:35.807 Did commit final
+[Postbox] 2025-11-13 15:02:35.808 AccountManager: currentAccountId = Optional(TelegramCore.AccountRecordId(rawValue: 4811737896789246978))
+[Postbox] 2025-11-13 15:02:35.808 AccountManager initialization took 15.848994255065918 ms
+[App 650711284] 2025-11-13 15:02:35.808 isInForeground = false
+[App 650711284] 2025-11-13 15:02:35.808 isActive = false
+[App 650711284] 2025-11-13 15:02:35.810 Already have a cleanup task pending
+[App 650711284] 2025-11-13 15:02:35.826 pushRegistry credentials: {length = 32, bytes = 0x6ca10ec8 5bcd0852 83710384 5b3034a2 ... 605ddb22 a90bd0e2 }
+[App 650711284] 2025-11-13 15:02:35.827 isInForeground = true
+[App 650711284] 2025-11-13 15:02:35.827 isActive = true
+[App 650711284] 2025-11-13 15:02:35.834 register for notifications: didRegisterForRemoteNotificationsWithDeviceToken (deviceToken: 3ad6b9bb32037501ce87448cbccb56a087d4c42cd85c0db55792bdfe600286f8)
+[Wakeup] 2025-11-13 15:02:35.848 enableBeginTransactions: true (active)
+[Wakeup] 2025-11-13 15:02:35.848 enableBeginTransactions: true (active)
+[MT] 2025-11-13 15:10:27.710 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 386346216, status: UserStatus.userStatusOnline(expires: 1763036127)), date: 1763035826) (7572181221466789889, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:27.724 Postbox transaction took 12.764930725097656 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:29.141 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 323467643, status: UserStatus.userStatusOffline(wasOnline: 1763035828)), date: 1763035827) (7572181227196601345, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:29.160 Postbox transaction took 18.33498477935791 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:29.548 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 378015379, status: UserStatus.userStatusOffline(wasOnline: 1763035829)), date: 1763035828) (7572181229330291713, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:29.565 Postbox transaction took 16.20793342590332 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:29.753 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 378015379, status: UserStatus.userStatusOnline(expires: 1763036129)), date: 1763035828) (7572181230341202945, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:29.771 Postbox transaction took 16.34800434112549 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:29.780 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 323467643, status: UserStatus.userStatusOnline(expires: 1763036129)), date: 1763035828) (7572181230566924289, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:29.793 Postbox transaction took 11.929035186767578 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:31.975 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 34891544, status: UserStatus.userStatusOnline(expires: 1763036131)), date: 1763035830) (7572181239231252481, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:31.988 Postbox transaction took 12.157082557678223 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:33.337 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 386346216, status: UserStatus.userStatusOffline(wasOnline: 1763035833)), date: 1763035832) (7572181245461872641, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:33.354 Postbox transaction took 15.916109085083008 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[Wakeup] 2025-11-13 15:10:41.444 enableBeginTransactions: true (active)
+[MT] 2025-11-13 15:10:41.444 [MTRequestMessageService#135583480 add request account.updateStatus(offline: boolFalse)]
+[MT] 2025-11-13 15:10:41.445 [MTProto#0x134551c00@0x135651cc0 preparing msgsAck (7572181280440929280/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:41.445 [MTProto#0x134551c00@0x135651cc0 preparing account.updateStatus(offline: boolFalse) (7572181280441294848/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:41.445     container (7572181280441814016) of (7572181280441294848), in -6472727693323255440
+[MT] 2025-11-13 15:10:41.533 [MTProto#0x134551c00@0x135651cc0 [88] received <MTRpcResultMessage: 0x129f1ca00> (7572181280995952641, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:41.533 [MTRequestMessageService#0x135583480 response for 7572181280441294848 is Bool.boolFalse]
+[Wakeup] 2025-11-13 15:10:41.533 enableBeginTransactions: true (active)
+[MT] 2025-11-13 15:10:41.976 [MTRequestMessageService#135583480 add request stories.getAllStories(flags: 1, state: Optional("1763035782:1840990644:0:1b06d8bf10f8081cb3"))]
+[MT] 2025-11-13 15:10:41.976 [MTProto#0x134551c00@0x135651cc0 preparing msgsAck (7572181282722012160/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:41.976 [MTProto#0x134551c00@0x135651cc0 preparing stories.getAllStories(flags: 1, state: Optional("1763035782:1840990644:0:1b06d8bf10f8081cb3")) (7572181282722158592/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:41.976     container (7572181282722434048) of (7572181282722158592), in -6472727693323255440
+[MT] 2025-11-13 15:10:42.006 [MTRequestMessageService#135583480 add request stories.getAllStories(flags: 5, state: Optional("1763035781:-1883976844:0:637064182832555c52"))]
+[MT] 2025-11-13 15:10:42.006 [MTProto#0x134551c00@0x135651cc0 preparing msgsAck (7572181282852832256/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.006 [MTProto#0x134551c00@0x135651cc0 preparing stories.getAllStories(flags: 5, state: Optional("1763035781:-1883976844:0:637064182832555c52")) (7572181282853008384/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.006     container (7572181282853297152) of (7572181282853008384), in -6472727693323255440
+[MT] 2025-11-13 15:10:42.020 [MTRequestMessageService#135583480 add request stories.getPeerStories(peer: inputPeerUser(userId: 153620471, accessHash: -59619825019313236))]
+[MT] 2025-11-13 15:10:42.021 [MTProto#0x134551c00@0x135651cc0 preparing msgsAck (7572181282914894848/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.021 [MTProto#0x134551c00@0x135651cc0 preparing stories.getPeerStories(peer: inputPeerUser(userId: 153620471, accessHash: -59619825019313236)) (7572181282915208192/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.021     container (7572181282915912704) of (7572181282915208192), in -6472727693323255440
+[MT] 2025-11-13 15:10:42.153 [MTProto#0x134551c00@0x135651cc0 [168] received Updates.updateShort(update: Update.updateUserStatus(userId: 264532291, status: UserStatus.userStatusOffline(wasOnline: 1763035841)), date: 1763035840) (7572181283247257601, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.153 [MTProto#0x134551c00@0x135651cc0 [168] received <MTMsgsAckMessage: 0x12593e380> (7572181283247257605, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.153 [MTProto#0x134551c00@0x135651cc0 [152] received <MTRpcResultMessage: 0x129f1c400> (7572181283264544769, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.155 [MTRequestMessageService#0x135583480 response for 7572181282722158592 is stories.AllStories.allStoriesNotModified(flags: 0, state: 1763035782:1840990644:0:1b06d8bf10f8081cb3, stealthMode: StoriesStealthMode.storiesStealthMode(flags: 0, activeUntilDate: nil, cooldownUntilDate: nil))]
+[Postbox] 2025-11-13 15:10:42.167 Postbox transaction took 13.159036636352539 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[Postbox] 2025-11-13 15:10:42.178 Postbox transaction took 10.49792766571045 ms, from: submodules/TelegramCore/Sources/TelegramEngine/Messages/StoryListContext.swift:402
+[MT] 2025-11-13 15:10:42.234 [MTProto#0x134551c00@0x135651cc0 [200] received <MTRpcResultMessage: 0x129f1d9c0> (7572181284025829377, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.235 [MTRequestMessageService#0x135583480 response for 7572181282853008384 is stories.AllStories.allStoriesNotModified(flags: 0, state: 1763035781:-1883976844:0:637064182832555c52, stealthMode: StoriesStealthMode.storiesStealthMode(flags: 0, activeUntilDate: nil, cooldownUntilDate: nil))]
+[MT] 2025-11-13 15:10:42.235 [MTProto#0x134551c00@0x135651cc0 [200] received <MTMsgsAckMessage: 0x12593c0d0> (7572181284025829381, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.235 [MTProto#0x134551c00@0x135651cc0 [296] received <MTRpcResultMessage: 0x129f1e580> (7572181284032292865, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.236 [MTRequestMessageService#0x135583480 response for 7572181282915208192 is stories.PeerStories.peerStories(stories: PeerStories.peerStories(flags: 0, peer: Peer.peerUser(userId: 153620471), maxReadId: nil, stories: []), chats: [], users: [User.user(flags: 1375739007, flags2: 272, id: 153620471, accessHash: Optional(-59619825019313236), firstName: Optional("Саня Кво"), lastName: Optional("| Study Kvo"), username: Optional("sanya_kvo"), phone: [[redacted]], photo: Optional(TelegramApi.Api.UserProfilePhoto.userProfilePhoto(flags: 2, photoId: 659794899397357225, strippedThumb: Optional(010808b8636fb483...20b), dcId: 2)), status: Optional(TelegramApi.Api.UserStatus.userStatusOnline(expires: 1763036111)), botInfoVersion: nil, restrictionReason: nil, botInlinePlaceholder: nil, langCode: nil, emojiStatus: Optional(TelegramApi.Api.EmojiStatus.emojiStatus(flags: 0, documentId: 5361632100522932644, until: nil)), usernames: nil, storiesMaxId: nil, color: Optional(TelegramApi.Api.PeerColor.peerColor(flags: 1, color: Optional(11), backgroundEmojiId: nil)), profileColor: nil, botActiveUsers: nil, botVerificationIcon: nil, sendPaidMessagesStars: nil)])]
+[Postbox] 2025-11-13 15:10:42.248 Postbox transaction took 13.202071189880371 ms, from: submodules/TelegramCore/Sources/TelegramEngine/Messages/StoryListContext.swift:402
+[Postbox] 2025-11-13 15:10:42.267 Postbox transaction took 19.490957260131836 ms, from: submodules/TelegramCore/Sources/TelegramEngine/Messages/StoryListContext.swift:2592
+[MT] 2025-11-13 15:10:42.268 [MTRequestMessageService#135583480 add request photos.getUserPhotos(userId: inputUser(userId: 153620471, accessHash: -59619825019313236), offset: 0, maxId: 0, limit: 100)]
+[MT] 2025-11-13 15:10:42.268 [MTProto#0x134551c00@0x135651cc0 preparing msgsAck (7572181283977370624/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.268 [MTProto#0x134551c00@0x135651cc0 preparing photos.getUserPhotos(userId: inputUser(userId: 153620471, accessHash: -59619825019313236), offset: 0, maxId: 0, limit: 100) (7572181283977538560/0 6453058107356521870)]
+[MT] 2025-11-13 15:10:42.268     container (7572181283977865216) of (7572181283977538560), in -6472727693323255440
+[MT] 2025-11-13 15:10:42.347 [MTProto#0x134551c00@0x135651cc0 [712] received <MTRpcResultMessage: 0x129f1caa0> (7572181284512012289, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:42.347 [MTRequestMessageService#0x135583480 response for 7572181283977538560 is photos.Photos.photos(photos: [Photo.photo(flags: 0, id: 659794899397357225, accessHash: 1107739189195822543, fileReference: 006915cac2319f10...21b, date: 1753200815, sizes: [PhotoSize.photoSize(type: a, w: 160, h: 160, size: 6088), PhotoSize.photoSize(type: b, w: 320, h: 320, size: 17275), PhotoSize.photoSize(type: c, w: 640, h: 640, size: 39837), PhotoSize.photoStrippedSize(type: i, bytes: 012828bf8aaf7770...194b)], videoSizes: nil, dcId: 2), Photo.photo(flags: 0, id: 659794899397357224, accessHash: 3093626709285717374, fileReference: 006915cac2500a6d...21b, date: 1643495875, sizes: [PhotoSize.photoSize(type: a, w: 160, h: 160, size: 8800), PhotoSize.photoSize(type: b, w: 320, h: 320, size: 28696), PhotoSize.photoSize(type: c, w: 640, h: 640, size: 116577), PhotoSize.photoStrippedSize(type: i, bytes: 012828ccd8ff00dd...206b)], videoSizes: nil, dcId: 2)], users: [])]
+[MT] 2025-11-13 15:10:43.901 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 73371701, status: UserStatus.userStatusOnline(expires: 1763036143)), date: 1763035842) (7572181290169857025, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:43.901 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 103941496, status: UserStatus.userStatusOnline(expires: 1763036143)), date: 1763035842) (7572181290985226241, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:43.919 Postbox transaction took 16.122937202453613 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:44.617 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 423666280, status: UserStatus.userStatusOffline(wasOnline: 1763035844)), date: 1763035843) (7572181293379211265, 6453058107356521870/-6472727693323255440)]
+[MT] 2025-11-13 15:10:44.618 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 423666280, status: UserStatus.userStatusOffline(wasOnline: 1763035844)), date: 1763035843) (7572181293614389249, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:44.634 Postbox transaction took 15.264034271240234 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:49.211 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 263166998, status: UserStatus.userStatusOnline(expires: 1763036148)), date: 1763035848) (7572181313934872577, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:49.228 Postbox transaction took 15.57302474975586 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:54.842 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 1830958747, status: UserStatus.userStatusOffline(wasOnline: 1763035854)), date: 1763035853) (7572181337862547457, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:54.859 Postbox transaction took 15.727996826171875 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:56.174 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 103941496, status: UserStatus.userStatusOffline(wasOnline: 1763035856)), date: 1763035855) (7572181343572499457, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:56.190 Postbox transaction took 14.41192626953125 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:58.310 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 243524509, status: UserStatus.userStatusOnline(expires: 1763036158)), date: 1763035857) (7572181352972569601, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:58.328 Postbox transaction took 16.24596118927002 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[MT] 2025-11-13 15:10:58.429 [MTProto#0x134551c00@0x135651cc0 [104] received Updates.updateShort(update: Update.updateUserStatus(userId: 323467643, status: UserStatus.userStatusOffline(wasOnline: 1763035858)), date: 1763035857) (7572181353596880897, 6453058107356521870/-6472727693323255440)]
+[Postbox] 2025-11-13 15:10:58.443 Postbox transaction took 13.581991195678711 ms, from: submodules/TelegramCore/Sources/State/AccountStateManager.swift:1026
+[Postbox] 2025-11-13 15:10:58.882 Postbox transaction took 128.8290023803711 ms, from: submodules/Postbox/Sources/Postbox.swift:3723
+[App 650711284] 2025-11-13 15:10:58.998 Memory consumption: 261 MB
