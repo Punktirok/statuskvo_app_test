@@ -26,9 +26,11 @@ export const openLessonLink = (lesson) => {
     ) {
       debugLog('openLessonLink:openTelegramLink', meta)
       WebApp.openTelegramLink(targetUrl)
+      WebApp.close()
     } else if (typeof WebApp.openLink === 'function') {
       debugLog('openLessonLink:openLink', meta)
       WebApp.openLink(targetUrl, { try_instant_view: false })
+      WebApp.close()
     } else {
       debugLog('openLessonLink:windowOpen', meta)
       window.open(targetUrl, '_blank', 'noopener,noreferrer')

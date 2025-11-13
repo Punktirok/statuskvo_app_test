@@ -1,5 +1,5 @@
 // Хуки React отвечают за хранение данных и работу с побочными эффектами
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
 // Готовые компоненты интерфейса
@@ -19,6 +19,8 @@ function CategoryScreen() {
   const decodedCategoryName = decodeURIComponent(categoryName)
   const { lessons, loading } = useLessonsByCategory(decodedCategoryName)
   const [searchTerm, setSearchTerm] = useState('')
+  const touchStartX = useRef(null)
+  const touchStartY = useRef(null)
 
   const trimmedSearch = searchTerm.trim()
 
@@ -75,8 +77,37 @@ function CategoryScreen() {
       ? 'Ничего не найдено. Попробуйте другой запрос.'
       : 'Скоро тут появятся уроки'
 
+  const handleTouchStart = (event) => {
+    const touch = event.touches?.[0]
+    if (!touch) return
+
+    touchStartX.current = touch.clientX
+    touchStartY.current = touch.clientY
+  }
+
+  const handleTouchEnd = (event) => {
+    const touch = event.changedTouches?.[0]
+    if (!touch || touchStartX.current == null) {
+      return
+    }
+
+    const deltaX = touch.clientX - touchStartX.current
+    const deltaY = Math.abs(touch.clientY - (touchStartY.current ?? touch.clientY))
+
+    if (touchStartX.current <= 40 && deltaX > 60 && deltaY < 40) {
+      navigate(-1)
+    }
+
+    touchStartX.current = null
+    touchStartY.current = null
+  }
+
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 md:max-w-[540px]">
+    <div
+      className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 md:max-w-[540px]"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Центральная колонка: фон, отступы и скругления совпадают с дизайном мини-аппа */}
       <div className="flex flex-col gap-3">
         {/* Фиксированная шапка с кнопкой назад, заголовком и поиском */}
