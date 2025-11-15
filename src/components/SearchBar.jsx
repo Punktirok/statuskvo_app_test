@@ -21,7 +21,7 @@ function SearchBar({
         value={value}
         placeholder={placeholder}
         onChange={(event) => onChange?.(event.target.value)}
-        className="w-full border-none bg-transparent text-base font-medium text-text-primary outline-none placeholder:text-text-secondary"
+        className="w-full border-none bg-transparent text-base font-medium text-text-primary outline-none placeholder:text-[#949494]"
         {...inputProps}
       />
 

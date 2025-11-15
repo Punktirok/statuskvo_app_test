@@ -111,7 +111,7 @@ function CategoryScreen() {
       {/* Центральная колонка: фон, отступы и скругления совпадают с дизайном мини-аппа */}
       <div className="flex flex-col gap-3">
         {/* Фиксированная шапка с кнопкой назад, заголовком и поиском */}
-        <div className="sticky top-0 z-10 -mx-4 flex flex-col gap-3 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
+        <div className="sticky top-0 z-10 -mx-4 flex flex-col gap-3 bg-surface-primary px-4 pt-3.5 pb-1 md:-mx-4">
           <header className="relative flex items-center justify-center">
             <button
               type="button"
