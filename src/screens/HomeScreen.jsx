@@ -23,6 +23,7 @@ function HomeScreen() {
   const { lessons, loading: lessonsLoading } = useAllLessons()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
+  const [activeTab, setActiveTab] = useState('home')
 
   useEffect(() => {
     let isMounted = true
@@ -137,19 +138,16 @@ function HomeScreen() {
   // Остальные категории собираем в группы
   const secondaryCategories = hasCategories ? filteredCategories.slice(1) : []
 
-  // Разметка экрана: контейнеры и карточки повторяют дизайн макета
-  return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 pt-1 md:max-w-[540px]">
-      {/* Основная колонка с отступами, чтобы интерфейс выглядел как в макете */}
-      <div className="flex flex-col gap-2">
-        {/* Фиксированный блок с поиском (как на экране категории) */}
-        <div className="sticky top-0 z-10 -mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
+  const renderHomeContent = () => (
+    <div className="flex flex-col gap-2">
+      {/* Фиксированный блок с поиском (как на экране категории) */}
+      <div className="sticky top-0 z-10 -mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
           <SearchBar
             value={searchTerm}
             onChange={setSearchTerm}
             className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
           />
-        </div>
+      </div>
 
         {hasSearch ? (
           <LessonList
@@ -292,6 +290,161 @@ function HomeScreen() {
             Кажется, такого нет
           </div>
         )}
+      </div>
+  )
+
+  const renderFavoritesContent = () => (
+    <div className="flex flex-1 flex-col items-center justify-center">
+      <div className="rounded-[20px] bg-surface-card px-4 py-10 text-center text-sm text-text-secondary shadow-card">
+        Избранные уроки появятся позже
+      </div>
+    </div>
+  )
+
+  const renderInfoContent = () => (
+    <div className="flex flex-1 flex-col items-center justify-center">
+      <div className="rounded-[20px] bg-surface-card px-4 py-10 text-center text-sm text-text-secondary shadow-card">
+        Информационный раздел в разработке
+      </div>
+    </div>
+  )
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'favorites':
+        return renderFavoritesContent()
+      case 'info':
+        return renderInfoContent()
+      default:
+        return renderHomeContent()
+    }
+  }
+
+  const tabButtonClass =
+    'inline-flex flex-col items-center justify-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent'
+
+  const homeIcon = (isActive) => (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8 6H21"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 12H21"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 18H21"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 6H3.01"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 12H3.01"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 18H3.01"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+
+  const heartIcon = (isActive) => (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M20.84 4.60999C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.60999L12 5.66999L10.94 4.60999C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.60999C2.1283 5.64169 1.54871 7.04096 1.54871 8.49999C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.49999C22.4518 7.77751 22.3095 7.0621 22.0329 6.39464C21.7563 5.72718 21.351 5.12075 20.84 4.60999Z"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+
+  const messageIcon = (isActive) => (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M21 11.5C21.0034 12.8199 20.6951 14.1219 20.1 15.3C19.3944 16.7118 18.3098 17.8992 16.9674 18.7293C15.6251 19.5594 14.0782 19.9994 12.5 20C11.1801 20.0035 9.87812 19.6951 8.7 19.1L3 21L4.9 15.3C4.30493 14.1219 3.99656 12.8199 4 11.5C4.00061 9.92179 4.44061 8.37488 5.27072 7.03258C6.10083 5.69028 7.28825 4.6056 8.7 3.90003C9.87812 3.30496 11.1801 2.99659 12.5 3.00003H13C15.0843 3.11502 17.053 3.99479 18.5291 5.47089C20.0052 6.94699 20.885 8.91568 21 11V11.5Z"
+        stroke={isActive ? '#2B00FF' : '#BABBC8'}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+
+  // Разметка экрана: контейнеры и карточки повторяют дизайн макета
+  return (
+    <div className="relative mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-32 pt-1 md:max-w-[540px]">
+      <div className="flex flex-1 flex-col">{renderContent()}</div>
+
+      {/* Нижняя навигация таб-бара */}
+      <div className="pointer-events-none fixed bottom-6 left-1/2 z-20 -translate-x-1/2">
+        <div className="Frame21 pointer-events-auto inline-flex items-center gap-11 rounded-[40px] bg-white/20 px-11 py-4 shadow-[0px_16px_32px_0px_rgba(23,24,42,0.08)] backdrop-blur-[20px] outline outline-1 outline-[#ffffff33] outline-offset-[-1px]">
+          <button
+            type="button"
+            aria-label="Главная"
+            onClick={() => setActiveTab('home')}
+            className={tabButtonClass}
+          >
+            {homeIcon(activeTab === 'home')}
+          </button>
+          <button
+            type="button"
+            aria-label="Избранное"
+            onClick={() => setActiveTab('favorites')}
+            className={tabButtonClass}
+          >
+            {heartIcon(activeTab === 'favorites')}
+          </button>
+          <button
+            type="button"
+            aria-label="Информация"
+            onClick={() => setActiveTab('info')}
+            className={tabButtonClass}
+          >
+            {messageIcon(activeTab === 'info')}
+          </button>
+        </div>
       </div>
     </div>
   )
