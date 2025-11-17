@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
 import FavoritesScreen from './FavoritesScreen.jsx'
+import InfoScreen from './InfoScreen.jsx'
 // Работа с данными
 import { fetchCategories } from '../api/api.js'
 import { useAllLessons } from '../hooks/useLessons.js'
@@ -307,14 +308,6 @@ function HomeScreen() {
       </div>
   )
 
-  const renderInfoContent = () => (
-    <div className="flex flex-1 flex-col items-center justify-center">
-      <div className="rounded-[20px] bg-surface-card px-4 py-10 text-center text-sm text-text-secondary shadow-card">
-        Информационный раздел в разработке
-      </div>
-    </div>
-  )
-
   const renderContent = () => {
     switch (activeTab) {
       case 'favorites':
@@ -328,7 +321,7 @@ function HomeScreen() {
           />
         )
       case 'info':
-        return renderInfoContent()
+        return <InfoScreen />
       default:
         return renderHomeContent()
     }
