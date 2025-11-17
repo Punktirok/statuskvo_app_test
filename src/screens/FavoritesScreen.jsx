@@ -79,7 +79,7 @@ function FavoritesScreen({
       )}
 
       {showEmptyState ? (
-        <div className="flex flex-1 flex-col items-center justify-center py-12 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center py-24 text-center">
           {emptyStateImage && (
             <img
               src={emptyStateImage}

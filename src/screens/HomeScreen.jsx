@@ -431,7 +431,7 @@ function HomeScreen() {
       {/* Нижняя навигация таб-бара */}
       {!isKeyboardOpen && (
         <div className="pointer-events-none fixed bottom-6 left-1/2 z-20 -translate-x-1/2">
-          <div className="Frame21 pointer-events-auto inline-flex items-center gap-11 rounded-[40px] bg-white/20 px-11 py-4 shadow-[0px_16px_32px_0px_rgba(23,24,42,0.08)] backdrop-blur-[20px] outline outline-1 outline-[#ffffff33] outline-offset-[-1px]">
+          <div className="Frame21 pointer-events-auto inline-flex items-center gap-11 rounded-[40px] bg-white/30 px-11 py-4 shadow-[0px_16px_32px_0px_rgba(23,24,42,0.08)] backdrop-blur-[20px] outline outline-1 outline-[#ffffff33] outline-offset-[-1px]">
           <button
             type="button"
             aria-label="Главная"
