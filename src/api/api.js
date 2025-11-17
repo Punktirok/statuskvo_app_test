@@ -46,6 +46,9 @@ const ensureIconKey = (lesson, categoryTitle) => {
 };
 
 const createLessonId = (rawLesson) => {
+  if (rawLesson.lesson_id) {
+    return rawLesson.lesson_id;
+  }
   if (rawLesson.id || rawLesson._id) {
     return rawLesson.id ?? rawLesson._id;
   }
@@ -115,7 +118,7 @@ const buildNormalizedLessons = (rawInput) => {
 
       addLessonToCategory(primaryCategoryTitle, {
         ...baseLesson,
-        id: `${baseId}__${primaryCategoryTitle || index}`,
+        lesson_id: `${baseId}__${primaryCategoryTitle || index}`,
         categoryTitle: primaryCategoryTitle,
         isPrimaryCategory: true,
       });
@@ -127,7 +130,7 @@ const buildNormalizedLessons = (rawInput) => {
       ) {
         addLessonToCategory(secondaryCategory, {
           ...baseLesson,
-          id: `${baseId}__${secondaryCategory || index}`,
+          lesson_id: `${baseId}__${secondaryCategory || index}`,
           categoryTitle: secondaryCategory,
           isPrimaryCategory: false,
         });
@@ -136,7 +139,7 @@ const buildNormalizedLessons = (rawInput) => {
       if (isYes(rawLesson.new)) {
         addLessonToCategory(NEW_CATEGORY_TITLE, {
           ...baseLesson,
-          id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
+          lesson_id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
           categoryTitle: NEW_CATEGORY_TITLE,
           isPrimaryCategory: false,
         });

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // Повторно используемые компоненты
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
+import FavoritesScreen from './FavoritesScreen.jsx'
 // Работа с данными
 import { fetchCategories } from '../api/api.js'
 import { useAllLessons } from '../hooks/useLessons.js'
@@ -24,6 +25,7 @@ function HomeScreen() {
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
   const [activeTab, setActiveTab] = useState('home')
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -138,14 +140,26 @@ function HomeScreen() {
   // Остальные категории собираем в группы
   const secondaryCategories = hasCategories ? filteredCategories.slice(1) : []
 
+  const handleSearchFocus = () => {
+    setIsKeyboardOpen(true)
+  }
+
+  const handleSearchBlur = () => {
+    setIsKeyboardOpen(false)
+  }
+
   const renderHomeContent = () => (
     <div className="flex flex-col gap-2">
       {/* Фиксированный блок с поиском (как на экране категории) */}
-      <div className="sticky top-0 z-10 -mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
+      <div className="-mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
           <SearchBar
             value={searchTerm}
             onChange={setSearchTerm}
             className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
+            inputProps={{
+              onFocus: handleSearchFocus,
+              onBlur: handleSearchBlur,
+            }}
           />
       </div>
 
@@ -293,14 +307,6 @@ function HomeScreen() {
       </div>
   )
 
-  const renderFavoritesContent = () => (
-    <div className="flex flex-1 flex-col items-center justify-center">
-      <div className="rounded-[20px] bg-surface-card px-4 py-10 text-center text-sm text-text-secondary shadow-card">
-        Избранные уроки появятся позже
-      </div>
-    </div>
-  )
-
   const renderInfoContent = () => (
     <div className="flex flex-1 flex-col items-center justify-center">
       <div className="rounded-[20px] bg-surface-card px-4 py-10 text-center text-sm text-text-secondary shadow-card">
@@ -312,7 +318,15 @@ function HomeScreen() {
   const renderContent = () => {
     switch (activeTab) {
       case 'favorites':
-        return renderFavoritesContent()
+        return (
+          <FavoritesScreen
+            lessons={lessons}
+            loading={lessonsLoading}
+            onLessonClick={openLessonLink}
+            onSearchFocus={handleSearchFocus}
+            onSearchBlur={handleSearchBlur}
+          />
+        )
       case 'info':
         return renderInfoContent()
       default:
@@ -412,18 +426,26 @@ function HomeScreen() {
     </svg>
   )
 
+  const containerPaddingClass = isKeyboardOpen ? 'pb-6' : 'pb-[42px]'
+
   // Разметка экрана: контейнеры и карточки повторяют дизайн макета
   return (
-    <div className="relative mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-32 pt-1 md:max-w-[540px]">
+    <div
+      className={`relative mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pt-1 md:max-w-[540px] ${containerPaddingClass}`}
+    >
       <div className="flex flex-1 flex-col">{renderContent()}</div>
 
       {/* Нижняя навигация таб-бара */}
-      <div className="pointer-events-none fixed bottom-6 left-1/2 z-20 -translate-x-1/2">
-        <div className="Frame21 pointer-events-auto inline-flex items-center gap-11 rounded-[40px] bg-white/20 px-11 py-4 shadow-[0px_16px_32px_0px_rgba(23,24,42,0.08)] backdrop-blur-[20px] outline outline-1 outline-[#ffffff33] outline-offset-[-1px]">
+      {!isKeyboardOpen && (
+        <div className="pointer-events-none fixed bottom-6 left-1/2 z-20 -translate-x-1/2">
+          <div className="Frame21 pointer-events-auto inline-flex items-center gap-11 rounded-[40px] bg-white/20 px-11 py-4 shadow-[0px_16px_32px_0px_rgba(23,24,42,0.08)] backdrop-blur-[20px] outline outline-1 outline-[#ffffff33] outline-offset-[-1px]">
           <button
             type="button"
             aria-label="Главная"
-            onClick={() => setActiveTab('home')}
+            onClick={() => {
+              setActiveTab('home')
+              setIsKeyboardOpen(false)
+            }}
             className={tabButtonClass}
           >
             {homeIcon(activeTab === 'home')}
@@ -431,7 +453,10 @@ function HomeScreen() {
           <button
             type="button"
             aria-label="Избранное"
-            onClick={() => setActiveTab('favorites')}
+            onClick={() => {
+              setActiveTab('favorites')
+              setIsKeyboardOpen(false)
+            }}
             className={tabButtonClass}
           >
             {heartIcon(activeTab === 'favorites')}
@@ -439,13 +464,17 @@ function HomeScreen() {
           <button
             type="button"
             aria-label="Информация"
-            onClick={() => setActiveTab('info')}
+            onClick={() => {
+              setActiveTab('info')
+              setIsKeyboardOpen(false)
+            }}
             className={tabButtonClass}
           >
             {messageIcon(activeTab === 'info')}
           </button>
         </div>
       </div>
+      )}
     </div>
   )
 }

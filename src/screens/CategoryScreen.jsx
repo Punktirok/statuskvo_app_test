@@ -10,6 +10,7 @@ import { useLessonsByCategory } from '../hooks/useLessons.js'
 // Иконки Telegram адаптированы через SDK
 import { getInterfaceIcon } from '../utils/iconLoader.js'
 import { openLessonLink } from '../utils/lessons.js'
+import { useFavorites } from '../context/FavoritesContext.jsx'
 
 const backIcon = getInterfaceIcon('iconBack')
 
@@ -19,6 +20,7 @@ function CategoryScreen() {
   const decodedCategoryName = decodeURIComponent(categoryName)
   const { lessons, loading } = useLessonsByCategory(decodedCategoryName)
   const [searchTerm, setSearchTerm] = useState('')
+  const { favoriteLessonIds, toggleFavorite } = useFavorites()
   const touchStartX = useRef(null)
   const touchStartY = useRef(null)
 
@@ -145,6 +147,9 @@ function CategoryScreen() {
           lessons={filteredLessons}
           onLessonClick={openLessonLink}
           emptyMessage={emptyMessage}
+          showFavoriteToggle
+          favoriteLessonIds={favoriteLessonIds}
+          onToggleFavorite={(lesson) => toggleFavorite(lesson.lesson_id)}
         />
       </div>
     </div>

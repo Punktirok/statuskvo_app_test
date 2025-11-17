@@ -13,7 +13,7 @@ export const openLessonLink = (lesson) => {
   }
 
   const meta = {
-    lessonId: lesson?.id ?? lesson?.baseId ?? lesson?.title,
+    lessonId: lesson?.lesson_id ?? lesson?.baseId ?? lesson?.title,
     platform: WebApp.platform,
     targetUrl,
   }

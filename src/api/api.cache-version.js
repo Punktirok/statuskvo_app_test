@@ -43,6 +43,9 @@ const ensureIconKey = (lesson, categoryTitle) => {
 };
 
 const createLessonId = (rawLesson) => {
+  if (rawLesson.lesson_id) {
+    return rawLesson.lesson_id;
+  }
   if (rawLesson.id || rawLesson._id) {
     return rawLesson.id ?? rawLesson._id;
   }
@@ -78,7 +81,7 @@ const buildNormalizedLessons = (rawLessonsByCategory = {}) => {
       const tags = parseTags(rawLesson.tags);
       const normalizedLesson = {
         ...rawLesson,
-        id: `${baseId}__${primaryCategoryTitle || index}`,
+        lesson_id: `${baseId}__${primaryCategoryTitle || index}`,
         tags,
       };
 
@@ -91,14 +94,14 @@ const buildNormalizedLessons = (rawLessonsByCategory = {}) => {
       ) {
         addLessonToCategory(secondaryCategory, {
           ...normalizedLesson,
-          id: `${baseId}__${secondaryCategory || index}`,
+          lesson_id: `${baseId}__${secondaryCategory || index}`,
         });
       }
 
       if (isYes(rawLesson.new)) {
         addLessonToCategory(NEW_CATEGORY_TITLE, {
           ...normalizedLesson,
-          id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
+          lesson_id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
         });
       }
     });
