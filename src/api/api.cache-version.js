@@ -81,8 +81,11 @@ const buildNormalizedLessons = (rawLessonsByCategory = {}) => {
       const tags = parseTags(rawLesson.tags);
       const normalizedLesson = {
         ...rawLesson,
-        lesson_id: `${baseId}__${primaryCategoryTitle || index}`,
+        lesson_id: baseId,
         tags,
+        primaryCategoryTitle,
+        categoryTitle: primaryCategoryTitle,
+        isPrimaryCategory: true,
       };
 
       addLessonToCategory(primaryCategoryTitle, normalizedLesson);
@@ -94,14 +97,16 @@ const buildNormalizedLessons = (rawLessonsByCategory = {}) => {
       ) {
         addLessonToCategory(secondaryCategory, {
           ...normalizedLesson,
-          lesson_id: `${baseId}__${secondaryCategory || index}`,
+          categoryTitle: secondaryCategory,
+          isPrimaryCategory: false,
         });
       }
 
       if (isYes(rawLesson.new)) {
         addLessonToCategory(NEW_CATEGORY_TITLE, {
           ...normalizedLesson,
-          lesson_id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
+          categoryTitle: NEW_CATEGORY_TITLE,
+          isPrimaryCategory: false,
         });
       }
     });

@@ -56,7 +56,7 @@ function LessonList({
       <div className="custom-divide [--divide-offset:60px]">
         {hasLessons ? (
           lessons.map((lesson) => {
-            const { lesson_id, title, categoryTitle } = lesson
+            const { lesson_id, title, categoryTitle, primaryCategoryTitle } = lesson
             const iconSrc = resolveIcon(lesson)
             const lessonHasUrl = Boolean(getLessonUrl(lesson))
             if (!lesson_id) {
@@ -64,6 +64,7 @@ function LessonList({
             }
             const lessonKey = lesson_id
             const isFavorite = favoritesSet.has(lessonKey)
+            const labelCategory = primaryCategoryTitle || categoryTitle
 
             const handleClick = () => {
               if (!lessonHasUrl || !onLessonClick) return
@@ -92,9 +93,9 @@ function LessonList({
                     {title}
                   </span>
 
-                  {showCategoryLabel && categoryTitle && (
+                  {showCategoryLabel && labelCategory && (
                     <span className="mt-1 block text-sm font-medium text-[#9F9F9F]">
-                      {categoryTitle}
+                      {labelCategory}
                     </span>
                   )}
                 </span>

@@ -17,9 +17,20 @@ function FavoritesScreen({
     if (!favoriteLessonIds || favoriteLessonIds.size === 0) {
       return []
     }
-    return lessons.filter(
-      ({ lesson_id }) => lesson_id && favoriteLessonIds.has(lesson_id),
-    )
+
+    const byId = new Map()
+    lessons.forEach((lesson) => {
+      const { lesson_id, isPrimaryCategory } = lesson
+      if (!lesson_id || !favoriteLessonIds.has(lesson_id)) {
+        return
+      }
+
+      if (!byId.has(lesson_id) || isPrimaryCategory !== false) {
+        byId.set(lesson_id, lesson)
+      }
+    })
+
+    return Array.from(byId.values())
   }, [lessons, favoriteLessonIds])
 
   const normalizedQuery = searchTerm.trim().toLowerCase()

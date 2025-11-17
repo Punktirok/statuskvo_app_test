@@ -112,13 +112,14 @@ const buildNormalizedLessons = (rawInput) => {
       const baseLesson = {
         ...rawLesson,
         baseId,
+        lesson_id: baseId,
         tags,
         primaryCategoryTitle,
       };
 
       addLessonToCategory(primaryCategoryTitle, {
         ...baseLesson,
-        lesson_id: `${baseId}__${primaryCategoryTitle || index}`,
+        lesson_id: baseId,
         categoryTitle: primaryCategoryTitle,
         isPrimaryCategory: true,
       });
@@ -130,7 +131,7 @@ const buildNormalizedLessons = (rawInput) => {
       ) {
         addLessonToCategory(secondaryCategory, {
           ...baseLesson,
-          lesson_id: `${baseId}__${secondaryCategory || index}`,
+          lesson_id: baseId,
           categoryTitle: secondaryCategory,
           isPrimaryCategory: false,
         });
@@ -139,7 +140,7 @@ const buildNormalizedLessons = (rawInput) => {
       if (isYes(rawLesson.new)) {
         addLessonToCategory(NEW_CATEGORY_TITLE, {
           ...baseLesson,
-          lesson_id: `${baseId}__${NEW_CATEGORY_TITLE || index}`,
+          lesson_id: baseId,
           categoryTitle: NEW_CATEGORY_TITLE,
           isPrimaryCategory: false,
         });
