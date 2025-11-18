@@ -59,7 +59,7 @@ function FavoritesScreen({
   const showSearch = !showEmptyState
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-1 flex-col gap-3">
       {!showEmptyState && (
         <h2 className="text-base font-semibold tracking-tight text-text-primary text-center">
           Избранное
