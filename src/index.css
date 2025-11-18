@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-surface-primary: #f3f3f8;
+  --color-surface-card: #ffffff;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-accent: #6366f1;
+
+  --font-sans: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+
+  --radius-card: 20px;
+  --radius-1xl: 0rem;
+}
 
 :root {
   font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -50,4 +63,11 @@ body {
 /* 👇 убираем линию у последнего элемента */
 .custom-divide > *:last-child::after {
   content: none;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

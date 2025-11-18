@@ -83,7 +83,7 @@ function LessonList({
                   <img
                     src={iconSrc}
                     alt=""
-                    className={`size-12 rounded-2xl ${(showCategoryLabel || showFavoriteToggle) ? 'self-start' : ''}`}
+                    className={`size-12 rounded-1xl ${(showCategoryLabel || showFavoriteToggle) ? 'self-start' : ''}`}
                     aria-hidden="true"
                   />
                 )}
