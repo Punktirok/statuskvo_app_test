@@ -79,19 +79,25 @@ function FavoritesScreen({
       )}
 
       {showEmptyState ? (
-        <div className="flex flex-1 flex-col items-center justify-center py-24 text-center">
-          {emptyStateImage && (
-            <img
-              src={emptyStateImage}
-              alt=""
-              className="mb-5 h-32 w-32"
-              aria-hidden="true"
-            />
-          )}
-          <p className="mb-4 text-xl font-semibold text-text-primary">Пока пусто</p>
-          <p className="max-w-[220px] text-base font-medium text-text-primary/80">
-            Здесь будут уроки, которые вы добавите в избранное
-          </p>
+        <div className="grid flex-1 grid-rows-[1fr_auto_2fr] text-center">
+          <div aria-hidden="true" />
+          <div className="flex flex-col items-center">
+            {emptyStateImage && (
+              <img
+                src={emptyStateImage}
+                alt=""
+                className="mb-5 h-32 w-32"
+                aria-hidden="true"
+              />
+            )}
+            <p className="mb-4 text-xl font-semibold text-text-primary">
+              Пока пусто
+            </p>
+            <p className="max-w-[220px] text-base font-medium text-text-primary/80">
+              Здесь будут уроки, которые вы добавите в избранное
+            </p>
+          </div>
+          <div aria-hidden="true" />
         </div>
       ) : (
         <LessonList
