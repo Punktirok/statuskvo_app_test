@@ -6,6 +6,7 @@ import { STATIC_CATEGORIES } from '../data/categories.js'
 const ENDPOINT = 'https://sanya-kvo.up.railway.app/webhook/lessons'; // пример: https://sanya-kvo.up.railway.app/webhook/lessons
 const NEW_CATEGORY_TITLE = 'Новые уроки';
 let lessonUid = 0;
+const FIRST_CLUB_ENDPOINT = 'https://sanya-kvo.up.railway.app/webhook/first_club'
 
 const categoriesIconMap = Object.fromEntries(
   STATIC_CATEGORIES.map(({ title, iconKey }) => [title, iconKey]),
@@ -203,4 +204,21 @@ export async function fetchAllLessons() {
         categoryTitle,
       })),
   );
+}
+
+export async function fetchFirstClubCards() {
+  const res = await fetch(FIRST_CLUB_ENDPOINT, { method: 'GET' })
+  if (!res.ok) {
+    throw new Error(`First club API ${res.status}`)
+  }
+  const data = await res.json()
+  if (!Array.isArray(data)) {
+    return []
+  }
+
+  return [...data].sort((a, b) => {
+    const left = a.card_id ?? ''
+    const right = b.card_id ?? ''
+    return left.localeCompare(right, undefined, { numeric: true, sensitivity: 'base' })
+  })
 }

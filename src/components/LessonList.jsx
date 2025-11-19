@@ -27,6 +27,7 @@ function LessonList({
   showFavoriteToggle = false,
   favoriteLessonIds,
   onToggleFavorite,
+  loading = false,
 }) {
   const hasLessons = lessons.length > 0
   const favoritesSet = favoriteLessonIds ?? emptyFavoritesSet
@@ -50,6 +51,30 @@ function LessonList({
       />
     </svg>
   )
+
+  if (loading) {
+    return (
+      <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">
+        <div className="flex flex-col gap-2">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div
+              key={`lesson-skeleton-${index}`}
+              className="flex items-center gap-3 py-3 first:pt-1 last:pb-1"
+            >
+              <div className="size-12 rounded-[12px] bg-[#F2F2F6]" />
+              <div className="flex-1 space-y-2">
+                <div className="h-4 w-3/4 rounded-full bg-[#F2F2F6]" />
+                {(showCategoryLabel || showFavoriteToggle) && (
+                  <div className="h-3 w-1/2 rounded-full bg-[#F2F2F6]" />
+                )}
+              </div>
+              <div className="h-5 w-5 rounded-full bg-[#F2F2F6]" />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">

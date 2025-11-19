@@ -1,7 +1,7 @@
 // Библиотечные хуки React для хранения данных и реакции на изменения
 import { useEffect, useMemo, useState } from 'react'
 // Позволяет переключаться между экранами без перезагрузки страницы
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 // Повторно используемые компоненты
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
@@ -19,14 +19,25 @@ const arrowIcon = getInterfaceIcon('iconArrow')
 
 function HomeScreen() {
   const navigate = useNavigate()
+  const location = useLocation()
   // Сохраняем полный список категорий, который получаем из временного API
   const [categories, setCategories] = useState([])
   // Используем общий хук с кэшированием уроков
   const { lessons, loading: lessonsLoading } = useAllLessons()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
-  const [activeTab, setActiveTab] = useState('home')
+  const [activeTab, setActiveTab] = useState(() => location.state?.tab ?? 'home')
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
+
+  useEffect(() => {
+    const targetTab = location.state?.tab
+    if (targetTab && targetTab !== activeTab) {
+      setActiveTab(targetTab)
+      const { tab, ...rest } = location.state ?? {}
+      const nextState = Object.keys(rest).length > 0 ? rest : null
+      navigate('.', { replace: true, state: nextState })
+    }
+  }, [location.state, activeTab, navigate])
 
   useEffect(() => {
     let isMounted = true
@@ -170,6 +181,7 @@ function HomeScreen() {
             onLessonClick={openLessonLink}
             emptyMessage={searchEmptyMessage}
             showCategoryLabel
+            loading={lessonsLoading}
           />
         ) : hasCategories ? (
           <div className="flex flex-col gap-3">

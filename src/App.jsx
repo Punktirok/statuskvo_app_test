@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import WebApp from '@twa-dev/sdk'
 import HomeScreen from './screens/HomeScreen.jsx'
 import CategoryScreen from './screens/CategoryScreen.jsx'
+import FirstClubScreen from './screens/FirstClubScreen.jsx'
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/category/:categoryName" element={<CategoryScreen />} />
+        <Route path="/first-club" element={<FirstClubScreen />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

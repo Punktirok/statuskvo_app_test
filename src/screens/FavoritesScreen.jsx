@@ -108,6 +108,7 @@ function FavoritesScreen({
           showFavoriteToggle
           favoriteLessonIds={favoriteLessonIds}
           onToggleFavorite={(lesson) => toggleFavorite(lesson.lesson_id)}
+          loading={loading}
         />
       )}
     </div>

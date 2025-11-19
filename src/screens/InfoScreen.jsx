@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
 
 const arrowIcon = getInterfaceIcon('iconArrow')
@@ -8,6 +9,7 @@ const getIcon = (name) =>
   new URL(`../assets/icons/category/category/${name}.png`, import.meta.url).href
 
 function InfoScreen() {
+  const navigate = useNavigate()
   const [legalMenuOpen, setLegalMenuOpen] = useState(false)
 
   const openExternalLink = (url) => {
@@ -49,7 +51,11 @@ function InfoScreen() {
         Всякое важное
       </h2>
 
-      <div className="relative flex h-[79px] items-center overflow-hidden rounded-[20px] bg-[#FF57B4] py-4 pl-6 pr-4">
+      <button
+        type="button"
+        onClick={() => navigate('/first-club', { state: { fromTab: 'info' } })}
+        className="relative flex h-[79px] items-center overflow-hidden rounded-[20px] bg-[#FF57B4] py-4 pl-6 pr-4 text-left transition-opacity duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:opacity-90"
+      >
         <p className="z-10 max-w-[200px] text-base font-semibold leading-snug text-white">
           Я впервые в клубе,
           <br />
@@ -63,7 +69,7 @@ function InfoScreen() {
             aria-hidden="true"
           />
         )}
-      </div>
+      </button>
 
       <div className="rounded-[20px] bg-surface-card px-4 py-2 shadow-card">
         <div className="custom-divide [&>*:last-child]:pb-1.5">
