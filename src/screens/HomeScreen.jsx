@@ -11,6 +11,7 @@ import InfoScreen from './InfoScreen.jsx'
 // Работа с данными
 import { fetchCategories } from '../api/lessons.js'
 import { useAllLessons } from '../hooks/useLessons.js'
+import { useFavorites } from '../context/FavoritesContext.jsx'
 // Утилита для подстановки нужных иконок по имени файла
 import { getCategoryIcon, getInterfaceIcon } from '../utils/iconLoader.js'
 // Открытие уроков в Telegram (или браузере) по клику
@@ -27,6 +28,7 @@ function HomeScreen() {
   const [categories, setCategories] = useState([])
   // Используем общий хук с кэшированием уроков
   const { lessons, loading: lessonsLoading } = useAllLessons()
+  const { favoriteLessonIds, toggleFavorite } = useFavorites()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
@@ -180,6 +182,9 @@ function HomeScreen() {
             emptyMessage={searchEmptyMessage}
             showCategoryLabel
             loading={lessonsLoading}
+            showFavoriteToggle
+            favoriteLessonIds={favoriteLessonIds}
+            onToggleFavorite={(lesson) => toggleFavorite(lesson.lesson_id)}
           />
         ) : hasCategories ? (
           <div className="flex flex-col gap-3">
