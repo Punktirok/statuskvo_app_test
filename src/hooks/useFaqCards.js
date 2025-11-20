@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { fetchFirstClubCards } from '../api/content.js'
+import { fetchFaqCards } from '../api/content.js'
 import { readCache, writeCache } from '../utils/cache.js'
 import { getNextMoscowTime } from '../utils/time.js'
 
-const CACHE_KEY = 'first-club-cards'
+const CACHE_KEY = 'faq-cards'
 
-export function useFirstClubCards() {
+export function useFaqCards() {
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -29,7 +29,7 @@ export function useFirstClubCards() {
       }
     }
 
-    fetchFirstClubCards()
+    fetchFaqCards()
       .then((data) => {
         if (!active) return
         setCards(data ?? [])

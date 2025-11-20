@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  fetchAllLessons,
-  fetchLessonsByCategory,
-} from '../api/api.js'
+import { fetchAllLessons, fetchLessonsByCategory } from '../api/lessons.js'
 
 const initialState = {
   data: [],

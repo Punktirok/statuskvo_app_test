@@ -1,14 +1,15 @@
 // Библиотечные хуки React для хранения данных и реакции на изменения
 import { useEffect, useMemo, useState } from 'react'
 // Позволяет переключаться между экранами без перезагрузки страницы
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 // Повторно используемые компоненты
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
+import EmptyState from '../components/EmptyState.jsx'
 import FavoritesScreen from './FavoritesScreen.jsx'
 import InfoScreen from './InfoScreen.jsx'
 // Работа с данными
-import { fetchCategories } from '../api/api.js'
+import { fetchCategories } from '../api/lessons.js'
 import { useAllLessons } from '../hooks/useLessons.js'
 // Утилита для подстановки нужных иконок по имени файла
 import { getCategoryIcon, getInterfaceIcon } from '../utils/iconLoader.js'
@@ -16,28 +17,25 @@ import { getCategoryIcon, getInterfaceIcon } from '../utils/iconLoader.js'
 import { openLessonLink } from '../utils/lessons.js'
 
 const arrowIcon = getInterfaceIcon('iconArrow')
+const TAB_KEYS = ['home', 'favorites', 'info']
 
 function HomeScreen() {
   const navigate = useNavigate()
-  const location = useLocation()
+  const { tab: tabParam = 'home' } = useParams()
+  const normalizedTab = TAB_KEYS.includes(tabParam) ? tabParam : 'home'
   // Сохраняем полный список категорий, который получаем из временного API
   const [categories, setCategories] = useState([])
   // Используем общий хук с кэшированием уроков
   const { lessons, loading: lessonsLoading } = useAllLessons()
   // Значение, которое пользователь вводит в поле поиска
   const [searchTerm, setSearchTerm] = useState('')
-  const [activeTab, setActiveTab] = useState(() => location.state?.tab ?? 'home')
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
 
   useEffect(() => {
-    const targetTab = location.state?.tab
-    if (targetTab && targetTab !== activeTab) {
-      setActiveTab(targetTab)
-      const { tab, ...rest } = location.state ?? {}
-      const nextState = Object.keys(rest).length > 0 ? rest : null
-      navigate('.', { replace: true, state: nextState })
+    if (!TAB_KEYS.includes(tabParam ?? 'home')) {
+      navigate('/home', { replace: true })
     }
-  }, [location.state, activeTab, navigate])
+  }, [navigate, tabParam])
 
   useEffect(() => {
     let isMounted = true
@@ -161,7 +159,7 @@ function HomeScreen() {
   }
 
   const renderHomeContent = () => (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-1 flex-col gap-2">
       {/* Фиксированный блок с поиском (как на экране категории) */}
       <div className="-mx-4 bg-surface-primary px-4 pt-3.5 pb-3 md:-mx-4">
           <SearchBar
@@ -312,16 +310,16 @@ function HomeScreen() {
             )}
           </div>
         ) : (
-          <div className="rounded-[20px] bg-surface-card px-4 py-6 text-center text-sm text-text-secondary shadow-card">
-            {/* Плашка с сообщением, если ничего не найдено */}
-            Кажется, такого нет
-          </div>
+          <EmptyState
+            title="Кажется, такого нет"
+            description="Скоро здесь появятся новые уроки."
+          />
         )}
       </div>
   )
 
   const renderContent = () => {
-    switch (activeTab) {
+    switch (normalizedTab) {
       case 'favorites':
         return (
           <FavoritesScreen
@@ -448,34 +446,40 @@ function HomeScreen() {
             type="button"
             aria-label="Главная"
             onClick={() => {
-              setActiveTab('home')
+              if (normalizedTab !== 'home') {
+                navigate('/home')
+              }
               setIsKeyboardOpen(false)
             }}
             className={tabButtonClass}
           >
-            {homeIcon(activeTab === 'home')}
+            {homeIcon(normalizedTab === 'home')}
           </button>
           <button
             type="button"
             aria-label="Избранное"
             onClick={() => {
-              setActiveTab('favorites')
+              if (normalizedTab !== 'favorites') {
+                navigate('/favorites')
+              }
               setIsKeyboardOpen(false)
             }}
             className={tabButtonClass}
           >
-            {heartIcon(activeTab === 'favorites')}
+            {heartIcon(normalizedTab === 'favorites')}
           </button>
           <button
             type="button"
             aria-label="Информация"
             onClick={() => {
-              setActiveTab('info')
+              if (normalizedTab !== 'info') {
+                navigate('/info')
+              }
               setIsKeyboardOpen(false)
             }}
             className={tabButtonClass}
           >
-            {messageIcon(activeTab === 'info')}
+            {messageIcon(normalizedTab === 'info')}
           </button>
         </div>
       </div>

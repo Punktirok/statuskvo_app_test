@@ -2,64 +2,39 @@ import { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useFirstClubCards } from '../hooks/useFirstClubCards.js'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
+import { parseMarkdownText } from '../utils/markdown.js'
 
 const backIcon = getInterfaceIcon('iconBack')
-
-const parseLineSegments = (line) => {
-  const segments = []
-  if (!line) return segments
-
-  const pattern = /\[([^[\]]+)\]\(([^)]+)\)/g
-  let lastIndex = 0
-  let match
-
-  while ((match = pattern.exec(line)) !== null) {
-    if (match.index > lastIndex) {
-      segments.push({ type: 'text', value: line.slice(lastIndex, match.index) })
-    }
-    segments.push({ type: 'link', label: match[1], href: match[2] })
-    lastIndex = match.index + match[0].length
-  }
-
-  if (lastIndex < line.length) {
-    segments.push({ type: 'text', value: line.slice(lastIndex) })
-  }
-
-  return segments
-}
 
 const CardText = ({ text, className, onLinkClick }) => {
   if (!text) return null
 
-  const lines = text.split('\n')
+  const lines = parseMarkdownText(text)
 
   return (
     <p className={className}>
-      {lines.map((line, lineIndex) => {
-        const segments = parseLineSegments(line)
-        return (
-          <span key={`line-${lineIndex}`}>
-            {lineIndex > 0 && <br />}
-            {segments.length > 0
-              ? segments.map((segment, segmentIndex) => {
-                  if (segment.type === 'link') {
-                    return (
-                      <button
-                        key={`${segment.label}-${segmentIndex}`}
-                        type="button"
-                        className="font-semibold text-accent"
-                        onClick={() => onLinkClick?.(segment.href)}
-                      >
-                        {segment.label}
-                      </button>
-                    )
-                  }
-                  return <span key={segmentIndex}>{segment.value}</span>
-                })
-              : line}
-          </span>
-        )
-      })}
+      {lines.map(({ segments, raw }, lineIndex) => (
+        <span key={`line-${lineIndex}`}>
+          {lineIndex > 0 && <br />}
+          {segments.length > 0
+            ? segments.map((segment, segmentIndex) => {
+                if (segment.type === 'link') {
+                  return (
+                    <button
+                      key={`${segment.label}-${segmentIndex}`}
+                      type="button"
+                      className="font-semibold text-accent"
+                      onClick={() => onLinkClick?.(segment.href)}
+                    >
+                      {segment.label}
+                    </button>
+                  )
+                }
+                return <span key={segmentIndex}>{segment.value}</span>
+              })
+            : raw}
+        </span>
+      ))}
     </p>
   )
 }
@@ -79,7 +54,7 @@ function FirstClubScreen() {
 
   const handleBack = () => {
     const targetTab = location.state?.fromTab ?? 'home'
-    navigate('/', { replace: true, state: { tab: targetTab } })
+    navigate(`/${targetTab}`, { replace: true })
   }
 
   return (
@@ -104,9 +79,9 @@ function FirstClubScreen() {
         Прочитай карточки ниже, они помогут тебе влиться в клуб
       </p>
 
-      <div className="mt-3 flex flex-col gap-3">
+      <div className="mt-3 flex flex-1 flex-col gap-3">
         {loading && (
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-1 flex-col gap-3">
             {Array.from({ length: 3 }).map((_, index) => (
               <div
                 key={`skeleton-${index}`}

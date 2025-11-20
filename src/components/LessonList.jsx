@@ -54,12 +54,12 @@ function LessonList({
 
   if (loading) {
     return (
-      <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">
-        <div className="flex flex-col gap-2">
-          {Array.from({ length: 4 }).map((_, index) => (
+      <div className="flex flex-1 flex-col rounded-[20px] bg-surface-card px-4 py-5 shadow-card min-h-[50vh]">
+        <div className="flex flex-1 flex-col gap-3">
+          {Array.from({ length: 8 }).map((_, index) => (
             <div
               key={`lesson-skeleton-${index}`}
-              className="flex items-center gap-3 py-3 first:pt-1 last:pb-1"
+              className="flex items-center gap-3"
             >
               <div className="size-12 rounded-[12px] bg-[#F2F2F6]" />
               <div className="flex-1 space-y-2">
@@ -71,6 +71,7 @@ function LessonList({
               <div className="h-5 w-5 rounded-full bg-[#F2F2F6]" />
             </div>
           ))}
+          <div className="flex-1 rounded-[16px] bg-[#F2F2F6]/60" />
         </div>
       </div>
     )

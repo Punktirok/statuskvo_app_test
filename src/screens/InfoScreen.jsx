@@ -32,6 +32,7 @@ function InfoScreen() {
     {
       title: 'Ответы на вопросы',
       icon: getIcon('iconFAQ'),
+      onClick: () => navigate('/faq', { state: { fromTab: 'info' } }),
     },
     {
       title: 'Написать в поддержку',

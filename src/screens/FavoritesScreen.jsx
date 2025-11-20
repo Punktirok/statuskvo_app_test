@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import SearchBar from '../components/SearchBar.jsx'
 import LessonList from '../components/LessonList.jsx'
+import EmptyState from '../components/EmptyState.jsx'
 import { useFavorites } from '../context/FavoritesContext.jsx'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
 
@@ -81,22 +82,12 @@ function FavoritesScreen({
       {showEmptyState ? (
         <div className="grid flex-1 grid-rows-[1fr_auto_2fr] text-center">
           <div aria-hidden="true" />
-          <div className="flex flex-col items-center">
-            {emptyStateImage && (
-              <img
-                src={emptyStateImage}
-                alt=""
-                className="mb-5 h-32 w-32"
-                aria-hidden="true"
-              />
-            )}
-            <p className="mb-4 text-xl font-semibold text-text-primary">
-              Пока пусто
-            </p>
-            <p className="max-w-[220px] text-base font-medium text-text-primary/80">
-              Здесь будут уроки, которые вы добавите в избранное
-            </p>
-          </div>
+          <EmptyState
+            imageSrc={emptyStateImage}
+            title="Пока пусто"
+            description="Здесь будут уроки, которые вы добавите в избранное"
+            className="bg-transparent shadow-none"
+          />
           <div aria-hidden="true" />
         </div>
       ) : (
