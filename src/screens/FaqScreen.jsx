@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useFaqCards } from '../hooks/useFaqCards.js'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
 import { parseMarkdownText } from '../utils/markdown.js'
+import { openExternalUrl } from '../utils/externalLinks.js'
 
 const backIcon = getInterfaceIcon('iconBack')
 const dropDownIcon = getInterfaceIcon('iconDropDown')
@@ -123,7 +124,7 @@ function FaqScreen() {
                     text={card.faq_cardText}
                     onLinkClick={(href) => {
                       if (!href) return
-                      window.open(href, '_blank', 'noopener,noreferrer')
+                      openExternalUrl(href)
                     }}
                   />
                 )}

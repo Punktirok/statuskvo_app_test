@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
+import { openExternalUrl } from '../utils/externalLinks.js'
 
 const arrowIcon = getInterfaceIcon('iconArrow')
 const bannerImage = getInterfaceIcon('imgImNew')
@@ -13,10 +14,7 @@ function InfoScreen() {
   const [legalMenuOpen, setLegalMenuOpen] = useState(false)
 
   const openExternalLink = (url) => {
-    if (typeof window === 'undefined') {
-      return
-    }
-    window.open(url, '_blank', 'noopener,noreferrer')
+    openExternalUrl(url)
   }
 
   const handleSupportClick = () => {

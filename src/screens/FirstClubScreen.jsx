@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useFirstClubCards } from '../hooks/useFirstClubCards.js'
 import { getInterfaceIcon } from '../utils/iconLoader.js'
 import { parseMarkdownText } from '../utils/markdown.js'
+import { openExternalUrl } from '../utils/externalLinks.js'
 
 const backIcon = getInterfaceIcon('iconBack')
 
@@ -46,8 +47,7 @@ function FirstClubScreen() {
 
   const openExternalLink = (url) => {
     if (!url) return
-    if (typeof window === 'undefined') return
-    window.open(url, '_blank', 'noopener,noreferrer')
+    openExternalUrl(url)
   }
 
   const content = useMemo(() => cards ?? [], [cards])
