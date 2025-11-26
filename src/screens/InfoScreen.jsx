@@ -27,7 +27,7 @@ function InfoScreen() {
     {
       title: 'Доступ в чат клуба',
       icon: getIcon('iconChat'),
-      onClick: () => openExternalLink('https://t.me/c/2801309173/13'),
+      onClick: () => openExternalLink('https://t.me/c/2801309173/203'),
     },
     {
       title: 'Ответы на вопросы',
