@@ -1,5 +1,5 @@
 // Хуки React отвечают за хранение данных и работу с побочными эффектами
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
 // Готовые компоненты интерфейса
@@ -8,11 +8,29 @@ import LessonList from '../components/LessonList.jsx'
 // Общий хук данных по урокам
 import { useLessonsByCategory } from '../hooks/useLessons.js'
 // Иконки Telegram адаптированы через SDK
-import { getInterfaceIcon } from '../utils/iconLoader.js'
+import { getInterfaceIcon, getLessonTypeIcon } from '../utils/iconLoader.js'
 import { openLessonLink } from '../utils/lessons.js'
 import { useFavorites } from '../context/FavoritesContext.jsx'
 
 const backIcon = getInterfaceIcon('iconBack')
+const arrowIcon = getInterfaceIcon('iconArrow')
+const folderIcon = getLessonTypeIcon('iconFolder')
+
+const normalizeFolderTitle = (value) =>
+  typeof value === 'string' ? value.trim() : ''
+
+const formatLessonCount = (count) => {
+  const absCount = Math.abs(count)
+  const lastDigit = absCount % 10
+  const lastTwoDigits = absCount % 100
+  if (lastDigit === 1 && lastTwoDigits !== 11) {
+    return `${count} урок`
+  }
+  if (lastDigit >= 2 && lastDigit <= 4 && (lastTwoDigits < 12 || lastTwoDigits > 14)) {
+    return `${count} урока`
+  }
+  return `${count} уроков`
+}
 
 function CategoryScreen() {
   const navigate = useNavigate()
@@ -21,6 +39,7 @@ function CategoryScreen() {
   const { lessons, loading } = useLessonsByCategory(decodedCategoryName)
   const [searchTerm, setSearchTerm] = useState('')
   const { favoriteLessonIds, toggleFavorite } = useFavorites()
+  const [activeFolder, setActiveFolder] = useState(null)
   const touchStartX = useRef(null)
   const touchStartY = useRef(null)
 
@@ -104,6 +123,68 @@ function CategoryScreen() {
     touchStartY.current = null
   }
 
+  const folderTitlesSet = useMemo(() => {
+    const titles = new Set()
+    lessons.forEach((lesson) => {
+      const folderTitle = normalizeFolderTitle(lesson.folderTitle)
+      if (folderTitle) {
+        titles.add(folderTitle)
+      }
+    })
+    return titles
+  }, [lessons])
+
+  const { folderEntries, folderMap, lessonsWithoutFolders } = useMemo(() => {
+    const map = new Map()
+    const withoutFolders = []
+
+    filteredLessons.forEach((lesson) => {
+      const folderTitle = normalizeFolderTitle(lesson.folderTitle)
+      if (!folderTitle) {
+        withoutFolders.push(lesson)
+        return
+      }
+      if (!map.has(folderTitle)) {
+        map.set(folderTitle, [])
+      }
+      map.get(folderTitle).push(lesson)
+    })
+
+    return {
+      folderMap: map,
+      lessonsWithoutFolders: withoutFolders,
+      folderEntries: Array.from(map.entries()).map(([title, folderLessons]) => ({
+        title,
+        lessons: folderLessons,
+        count: folderLessons.length,
+      })),
+    }
+  }, [filteredLessons])
+
+  const activeFolderLessons = activeFolder ? folderMap.get(activeFolder) ?? [] : []
+  const visibleLessons = activeFolder ? activeFolderLessons : lessonsWithoutFolders
+  const shouldRenderLessonList =
+    activeFolder || lessonsWithoutFolders.length > 0 || folderEntries.length === 0
+  const showFolders = !activeFolder && folderEntries.length > 0
+  const screenTitle = activeFolder || decodedCategoryName
+
+  useEffect(() => {
+    if (!activeFolder) {
+      return
+    }
+    if (!folderTitlesSet.has(activeFolder)) {
+      setActiveFolder(null)
+    }
+  }, [activeFolder, folderTitlesSet])
+
+  const handleBackClick = () => {
+    if (activeFolder) {
+      setActiveFolder(null)
+      return
+    }
+    navigate(-1)
+  }
+
   return (
     <div
       className="mx-auto flex min-h-screen w-full max-w-[480px] flex-col bg-surface-primary px-4 pb-12 md:max-w-[540px]"
@@ -118,7 +199,7 @@ function CategoryScreen() {
             <button
               type="button"
               aria-label="Назад"
-              onClick={() => navigate(-1)}
+              onClick={handleBackClick}
               className="absolute left-0 flex h-[32px] w-[46px] items-center justify-center rounded-full bg-surface-card shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {backIcon && (
@@ -131,7 +212,7 @@ function CategoryScreen() {
               )}
             </button>
             <h1 className="mx-[46px] text-center text-base font-semibold tracking-tight text-text-primary">
-              {decodedCategoryName}
+              {screenTitle}
             </h1>
           </header>
 
@@ -143,15 +224,67 @@ function CategoryScreen() {
           />
         </div>
 
-        <LessonList
-          lessons={filteredLessons}
-          onLessonClick={openLessonLink}
-          emptyMessage={emptyMessage}
-          showFavoriteToggle
-          favoriteLessonIds={favoriteLessonIds}
-          onToggleFavorite={(lesson) => toggleFavorite(lesson.lesson_id)}
-          loading={loading}
-        />
+        {showFolders && (
+          <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">
+            <div className="custom-divide [--divide-offset:60px] [&>*:first-child]:pt-1.5 [&>*:last-child]:pb-1.5">
+              {folderEntries.map(({ title, count }) => (
+                <button
+                  key={title}
+                  type="button"
+                  onClick={() => setActiveFolder(title)}
+                  className="flex w-full items-center justify-between gap-3 py-3 text-left transition-colors duration-200 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  <span className="flex items-center gap-3">
+                    {folderIcon && (
+                      <img
+                        src={folderIcon}
+                        alt=""
+                        className="size-12 rounded-1xl"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="flex flex-col text-left">
+                      <span className="text-base font-medium leading-snug text-text-primary">
+                        {title}
+                      </span>
+                      <span className="text-sm font-medium text-[#9F9F9F]">
+                        {formatLessonCount(count)}
+                      </span>
+                    </span>
+                  </span>
+                  {arrowIcon && (
+                    <img
+                      src={arrowIcon}
+                      alt=""
+                      className="size-3 shrink-0"
+                      aria-hidden="true"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {shouldRenderLessonList && (
+          <LessonList
+            lessons={visibleLessons}
+            onLessonClick={openLessonLink}
+            emptyMessage={emptyMessage}
+            showFavoriteToggle
+            favoriteLessonIds={favoriteLessonIds}
+            onToggleFavorite={(lesson) => toggleFavorite(lesson.lesson_id)}
+            loading={loading}
+          />
+        )}
+
+        {!shouldRenderLessonList && !loading && (
+          <div className="rounded-[20px] bg-surface-card px-4 py-6 text-center text-sm text-text-secondary shadow-card">
+            {trimmedSearch
+              ? 'Выберите папку с подходящими уроками выше.'
+              : 'Посмотрите уроки в папках выше.'}
+          </div>
+        )}
       </div>
     </div>
   )
