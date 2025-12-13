@@ -7,6 +7,15 @@ let lessonUid = 0
 const LESSONS_CACHE_KEY = 'lessons-cache'
 const LESSONS_UPDATE_START = 10
 const LESSONS_UPDATE_END = 11
+const CACHE_MODE_STORAGE_KEY = 'lessons-cache-mode'
+const CACHE_MODE_QUERY_PARAM = 'cache'
+
+const CACHE_MODES = {
+  CACHE: 'cache',
+  NETWORK: 'network',
+}
+
+let resolvedCacheMode = null
 
 const categoriesIconMap = Object.fromEntries(
   STATIC_CATEGORIES.map(({ title, iconKey }) => [title, iconKey]),
@@ -155,24 +164,104 @@ const buildNormalizedLessons = (rawInput) => {
 }
 
 let inMemoryLessons = null
+const getStorage = () => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+  try {
+    return window.localStorage ?? null
+  } catch {
+    return null
+  }
+}
+
+const normalizeCacheMode = (value) => {
+  if (!value) return null
+  const normalized = String(value).trim().toLowerCase()
+  if (normalized === 'off' || normalized === CACHE_MODES.NETWORK) {
+    return CACHE_MODES.NETWORK
+  }
+  if (normalized === 'on' || normalized === CACHE_MODES.CACHE) {
+    return CACHE_MODES.CACHE
+  }
+  return null
+}
+
+const readCacheModeFromQuery = () => {
+  if (typeof window === 'undefined') return null
+  try {
+    const params = new URLSearchParams(window.location.search ?? '')
+    return normalizeCacheMode(params.get(CACHE_MODE_QUERY_PARAM))
+  } catch {
+    return null
+  }
+}
+
+const readPersistedCacheMode = () => {
+  const storage = getStorage()
+  if (!storage) return null
+  try {
+    return storage.getItem(CACHE_MODE_STORAGE_KEY)
+  } catch {
+    return null
+  }
+}
+
+const persistCacheMode = (mode) => {
+  const storage = getStorage()
+  if (!storage) return
+  try {
+    storage.setItem(CACHE_MODE_STORAGE_KEY, mode)
+  } catch {
+    // ignore
+  }
+}
+
+const resolveCacheMode = () => {
+  if (resolvedCacheMode) {
+    return resolvedCacheMode
+  }
+
+  const fromQuery = readCacheModeFromQuery()
+  if (fromQuery) {
+    persistCacheMode(fromQuery)
+    resolvedCacheMode = fromQuery
+    return resolvedCacheMode
+  }
+
+  const stored = normalizeCacheMode(readPersistedCacheMode())
+  if (stored) {
+    resolvedCacheMode = stored
+    return resolvedCacheMode
+  }
+
+  resolvedCacheMode = CACHE_MODES.CACHE
+  return resolvedCacheMode
+}
+
+const shouldBypassCache = () => resolveCacheMode() === CACHE_MODES.NETWORK
 
 const loadAllLessons = async () => {
   const now = Date.now()
-  const forceRefresh = isWithinMoscowWindow(LESSONS_UPDATE_START, LESSONS_UPDATE_END)
-  if (!forceRefresh && inMemoryLessons && inMemoryLessons.expiresAt > now) {
+  const bypassCache = shouldBypassCache()
+  const forceRefresh =
+    bypassCache || isWithinMoscowWindow(LESSONS_UPDATE_START, LESSONS_UPDATE_END)
+  if (!bypassCache && !forceRefresh && inMemoryLessons && inMemoryLessons.expiresAt > now) {
     return inMemoryLessons
   }
 
-  const cached = readCache(LESSONS_CACHE_KEY)
-  if (
-    !forceRefresh &&
-    cached &&
-    cached.expiresAt &&
-    cached.expiresAt > now &&
-    cached.lessonsByCategory
-  ) {
-    inMemoryLessons = cached
-    return cached
+  if (!bypassCache) {
+    const cached = readCache(LESSONS_CACHE_KEY)
+    if (
+      !forceRefresh &&
+      cached &&
+      cached.expiresAt &&
+      cached.expiresAt > now &&
+      cached.lessonsByCategory
+    ) {
+      inMemoryLessons = cached
+      return cached
+    }
   }
 
   const res = await fetch(LESSONS_ENDPOINT, { method: 'GET' })
@@ -188,8 +277,14 @@ const loadAllLessons = async () => {
     timestamp: Date.now(),
     expiresAt: getNextMoscowTime(LESSONS_UPDATE_START),
   }
-  inMemoryLessons = normalized
-  writeCache(LESSONS_CACHE_KEY, normalized)
+
+  if (!bypassCache) {
+    inMemoryLessons = normalized
+    writeCache(LESSONS_CACHE_KEY, normalized)
+  } else {
+    inMemoryLessons = null
+  }
+
   return normalized
 }
 
