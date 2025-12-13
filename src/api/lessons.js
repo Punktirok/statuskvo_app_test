@@ -4,7 +4,7 @@ import { readCache, writeCache } from '../utils/cache.js'
 import { getNextMoscowTime, isWithinMoscowWindow } from '../utils/time.js'
 
 let lessonUid = 0
-const LESSONS_CACHE_KEY = 'lessons-cache'
+const LESSONS_CACHE_KEY = 'lessons-cache-v2'
 const LESSONS_UPDATE_START = 10
 const LESSONS_UPDATE_END = 11
 const CACHE_MODE_STORAGE_KEY = 'lessons-cache-mode'
