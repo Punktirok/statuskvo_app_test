@@ -1,5 +1,6 @@
 // Хуки React отвечают за хранение данных и работу с побочными эффектами
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 // Позволяют узнать какую категорию выбрал пользователь и вернуться назад
 import { useNavigate, useParams } from 'react-router-dom'
 // Готовые компоненты интерфейса
@@ -271,7 +272,16 @@ function CategoryScreen() {
   }
 
   const handleOpenSearch = () => {
-    setIsSearchOpen(true)
+    if (!isSearchOpen) {
+      if (typeof flushSync === 'function') {
+        flushSync(() => {
+          setIsSearchOpen(true)
+        })
+      } else {
+        setIsSearchOpen(true)
+      }
+    }
+    focusSearchInput()
   }
 
   useEffect(() => {
