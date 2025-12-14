@@ -15,6 +15,10 @@ import { useFavorites } from '../context/FavoritesContext.jsx'
 const backIcon = getInterfaceIcon('iconBack')
 const arrowIcon = getInterfaceIcon('iconArrow')
 const folderIcon = getLessonTypeIcon('iconFolder')
+const searchIcon = getInterfaceIcon('iconSearch')
+const searchIconBig = getInterfaceIcon('iconSearchBig')
+const sortIcon = getInterfaceIcon('iconSort')
+const checkIcon = getInterfaceIcon('iconCheck')
 
 const normalizeFolderTitle = (value) =>
   typeof value === 'string' ? value.trim() : ''
@@ -38,12 +42,20 @@ function CategoryScreen() {
   const decodedCategoryName = decodeURIComponent(categoryName)
   const { lessons, loading } = useLessonsByCategory(decodedCategoryName)
   const [searchTerm, setSearchTerm] = useState('')
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { favoriteLessonIds, toggleFavorite } = useFavorites()
   const [activeFolder, setActiveFolder] = useState(null)
   const touchStartX = useRef(null)
   const touchStartY = useRef(null)
+  const searchInputRef = useRef(null)
+  const searchContainerRef = useRef(null)
+  const sortMenuRef = useRef(null)
+  const sortButtonRef = useRef(null)
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false)
+  const [sortOrder, setSortOrder] = useState('desc')
 
   const trimmedSearch = searchTerm.trim()
+  const isSearchExpanded = isSearchOpen
 
   const filteredLessons = useMemo(() => {
     if (!trimmedSearch) {
@@ -134,11 +146,16 @@ function CategoryScreen() {
     return titles
   }, [lessons])
 
+  const sortedLessons = useMemo(
+    () => (sortOrder === 'desc' ? filteredLessons : [...filteredLessons].reverse()),
+    [filteredLessons, sortOrder],
+  )
+
   const { folderEntries, folderMap, lessonsWithoutFolders } = useMemo(() => {
     const map = new Map()
     const withoutFolders = []
 
-    filteredLessons.forEach((lesson) => {
+    sortedLessons.forEach((lesson) => {
       const folderTitle = normalizeFolderTitle(lesson.folderTitle)
       if (!folderTitle) {
         withoutFolders.push(lesson)
@@ -159,7 +176,7 @@ function CategoryScreen() {
         count: folderLessons.length,
       })),
     }
-  }, [filteredLessons])
+  }, [sortedLessons])
 
   const activeFolderLessons = activeFolder ? folderMap.get(activeFolder) ?? [] : []
   const visibleLessons = activeFolder ? activeFolderLessons : lessonsWithoutFolders
@@ -177,12 +194,79 @@ function CategoryScreen() {
     }
   }, [activeFolder, folderTitlesSet])
 
+  useEffect(() => {
+    if (!isSearchOpen) {
+      return
+    }
+    if (typeof document === 'undefined') {
+      return
+    }
+    const handlePointerDown = (event) => {
+      if (!searchContainerRef.current) {
+        return
+      }
+      if (!searchContainerRef.current.contains(event.target)) {
+        setIsSearchOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [isSearchOpen])
+
+  useEffect(() => {
+    if (!isSortMenuOpen) {
+      return
+    }
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const handlePointerDown = (event) => {
+      if (
+        sortMenuRef.current?.contains(event.target) ||
+        sortButtonRef.current?.contains(event.target)
+      ) {
+        return
+      }
+      setIsSortMenuOpen(false)
+    }
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [isSortMenuOpen])
+
+  useEffect(() => {
+    if (!isSearchOpen) {
+      return
+    }
+    if (typeof window === 'undefined' || typeof window.requestAnimationFrame !== 'function') {
+      searchInputRef.current?.focus()
+      return
+    }
+    const frame = window.requestAnimationFrame(() => {
+      searchInputRef.current?.focus()
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [isSearchOpen])
+
   const handleBackClick = () => {
     if (activeFolder) {
       setActiveFolder(null)
       return
     }
     navigate(-1)
+  }
+
+  const handleOpenSearch = () => {
+    setIsSearchOpen(true)
+  }
+
+  const handleToggleSortMenu = () => {
+    setIsSortMenuOpen((prev) => !prev)
+  }
+
+  const handleSortChange = (order) => {
+    setSortOrder(order)
+    setIsSortMenuOpen(false)
   }
 
   return (
@@ -195,12 +279,12 @@ function CategoryScreen() {
       <div className="flex flex-1 flex-col gap-3">
         {/* Фиксированная шапка с кнопкой назад, заголовком и поиском */}
         <div className="sticky top-0 z-10 -mx-4 flex flex-col gap-3 bg-surface-primary px-4 pt-3.5 pb-1 md:-mx-4">
-          <header className="relative flex items-center justify-center">
+          <header className="relative flex min-h-[48px] items-center">
             <button
               type="button"
               aria-label="Назад"
               onClick={handleBackClick}
-              className="absolute left-0 flex h-[32px] w-[46px] items-center justify-center rounded-full bg-surface-card shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="flex h-[32px] w-[46px] items-center justify-center rounded-full bg-surface-card shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {backIcon && (
                 <img
@@ -211,22 +295,95 @@ function CategoryScreen() {
                 />
               )}
             </button>
-            <h1 className="mx-[46px] text-center text-base font-semibold tracking-tight text-text-primary">
-              {screenTitle}
-            </h1>
+            {isSearchExpanded ? (
+              <div ref={searchContainerRef} className="ml-3 flex-1">
+                <SearchBar
+                  value={searchTerm}
+                  onChange={setSearchTerm}
+                  className="h-12 w-full rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
+                  inputRef={searchInputRef}
+                />
+              </div>
+            ) : (
+              <>
+                <div className="pointer-events-none absolute left-1/2 -translate-x-1/2">
+                  <h1 className="max-w-[60vw] truncate text-center text-base font-semibold tracking-tight text-text-primary">
+                    {screenTitle}
+                  </h1>
+                </div>
+                <div className="ml-auto flex items-center gap-1">
+                  {sortIcon && (
+                    <button
+                      type="button"
+                      aria-label="Сортировать"
+                      onClick={handleToggleSortMenu}
+                      ref={sortButtonRef}
+                      className="relative flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    >
+                      <img src={sortIcon} alt="" className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    aria-label="Показать поиск"
+                    onClick={handleOpenSearch}
+                    className="flex h-10 w-10 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    {(searchIconBig || searchIcon) && (
+                      <img
+                        src={searchIconBig ?? searchIcon}
+                        alt=""
+                        className="h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
+                </div>
+              </>
+            )}
+            {isSortMenuOpen && (
+              <div
+                ref={sortMenuRef}
+                className="absolute right-0 top-full mt-2 w-56 rounded-3xl bg-white/95 p-2 text-sm font-medium text-text-primary shadow-[0px_12px_30px_rgba(20,20,43,0.12)] backdrop-blur-md"
+              >
+                <div className="flex flex-col gap-1">
+                  <button
+                    type="button"
+                    onClick={() => handleSortChange('desc')}
+                    className={`flex items-center justify-between rounded-2xl px-3 py-3 text-left ${
+                      sortOrder === 'desc'
+                        ? 'bg-surface-primary text-text-primary'
+                        : 'text-text-secondary hover:bg-surface-primary/70'
+                    }`}
+                  >
+                    <span>От новых к старым</span>
+                    {sortOrder === 'desc' && checkIcon && (
+                      <img src={checkIcon} alt="" className="ml-3 h-4 w-4" aria-hidden="true" />
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleSortChange('asc')}
+                    className={`flex items-center justify-between rounded-2xl px-3 py-3 text-left ${
+                      sortOrder === 'asc'
+                        ? 'bg-surface-primary text-text-primary'
+                        : 'text-text-secondary hover:bg-surface-primary/70'
+                    }`}
+                  >
+                    <span>От старых к новым</span>
+                    {sortOrder === 'asc' && checkIcon && (
+                      <img src={checkIcon} alt="" className="ml-3 h-4 w-4" aria-hidden="true" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
           </header>
-
-          {/* Поисковая строка для фильтрации уроков */}
-          <SearchBar
-            value={searchTerm}
-            onChange={setSearchTerm}
-            className="h-12 rounded-[41px] border border-black/5 px-5 py-2.5 shadow-none"
-          />
         </div>
 
         {showFolders && (
           <div className="rounded-[20px] bg-surface-card px-4 py-1 shadow-card">
-            <div className="custom-divide [--divide-offset:60px] [&>*:first-child]:pt-1.5 [&>*:last-child]:pb-1.5">
+            <div className="custom-divide [--divide-offset:60px] [&>*:first-child]:pt-3 [&>*:last-child]:pb-3">
               {folderEntries.map(({ title, count }) => (
                 <button
                   key={title}

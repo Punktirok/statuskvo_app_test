@@ -69,6 +69,26 @@ const createLessonId = (rawLesson) => {
   return `lesson-${lessonUid}`
 }
 
+const resolveFolderTitle = (rawLesson) => {
+  if (!rawLesson) return undefined
+  const candidates = [
+    rawLesson.folderTitle,
+    rawLesson.folder_title,
+    rawLesson.folder,
+    rawLesson.foldername,
+    rawLesson.folder_name,
+  ]
+  for (const candidate of candidates) {
+    if (typeof candidate === 'string') {
+      const trimmed = candidate.trim()
+      if (trimmed) {
+        return trimmed
+      }
+    }
+  }
+  return undefined
+}
+
 const toLessonsByCategoryMap = (rawData) => {
   if (!rawData) {
     return {}
@@ -119,12 +139,14 @@ const buildNormalizedLessons = (rawInput) => {
     lessons.forEach((rawLesson) => {
       const baseId = createLessonId(rawLesson)
       const tags = parseTags(rawLesson.tags)
+      const folderTitle = resolveFolderTitle(rawLesson)
       const baseLesson = {
         ...rawLesson,
         baseId,
         lesson_id: baseId,
         tags,
         primaryCategoryTitle,
+        folderTitle,
       }
 
       addLessonToCategory(primaryCategoryTitle, {

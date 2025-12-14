@@ -9,6 +9,7 @@ function SearchBar({
   placeholder = 'Поиск',
   className = '',
   inputProps = {},
+  inputRef,
 }) {
   const showClear = Boolean(value)
 
@@ -17,6 +18,7 @@ function SearchBar({
       className={`flex items-center gap-2 rounded-full bg-surface-card px-4 py-3 text-sm shadow-card ${className}`}
     >
       <input
+        ref={inputRef}
         type="text"
         value={value}
         placeholder={placeholder}
