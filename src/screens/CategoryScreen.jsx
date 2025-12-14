@@ -272,8 +272,13 @@ function CategoryScreen() {
 
   const handleOpenSearch = () => {
     setIsSearchOpen(true)
-    focusSearchInput()
   }
+
+  useEffect(() => {
+    if (isSearchOpen) {
+      focusSearchInput()
+    }
+  }, [isSearchOpen])
 
   const handleToggleSortMenu = () => {
     setIsSortMenuOpen((prev) => !prev)
