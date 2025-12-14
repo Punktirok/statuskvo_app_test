@@ -53,6 +53,7 @@ function CategoryScreen() {
   const sortButtonRef = useRef(null)
   const [isSortMenuOpen, setIsSortMenuOpen] = useState(false)
   const [sortOrder, setSortOrder] = useState('desc')
+  const focusAnimationFrame = useRef(null)
 
   const trimmedSearch = searchTerm.trim()
   const isSearchExpanded = isSearchOpen
@@ -235,18 +236,14 @@ function CategoryScreen() {
   }, [isSortMenuOpen])
 
   useEffect(() => {
-    if (!isSearchOpen) {
-      return
+    return () => {
+      if (typeof window !== 'undefined' && typeof window.cancelAnimationFrame === 'function') {
+        if (focusAnimationFrame.current != null) {
+          window.cancelAnimationFrame(focusAnimationFrame.current)
+        }
+      }
     }
-    if (typeof window === 'undefined' || typeof window.requestAnimationFrame !== 'function') {
-      searchInputRef.current?.focus()
-      return
-    }
-    const frame = window.requestAnimationFrame(() => {
-      searchInputRef.current?.focus()
-    })
-    return () => window.cancelAnimationFrame(frame)
-  }, [isSearchOpen])
+  }, [])
 
   const handleBackClick = () => {
     if (activeFolder) {
@@ -256,8 +253,26 @@ function CategoryScreen() {
     navigate(-1)
   }
 
+  const focusSearchInput = () => {
+    if (typeof window === 'undefined' || typeof window.requestAnimationFrame !== 'function') {
+      searchInputRef.current?.focus()
+      return
+    }
+
+    if (focusAnimationFrame.current != null) {
+      window.cancelAnimationFrame(focusAnimationFrame.current)
+    }
+
+    focusAnimationFrame.current = window.requestAnimationFrame(() => {
+      focusAnimationFrame.current = window.requestAnimationFrame(() => {
+        searchInputRef.current?.focus({ preventScroll: true })
+      })
+    })
+  }
+
   const handleOpenSearch = () => {
     setIsSearchOpen(true)
+    focusSearchInput()
   }
 
   const handleToggleSortMenu = () => {
