@@ -254,9 +254,29 @@ function CategoryScreen() {
     navigate(-1)
   }
 
-  const focusSearchInput = () => {
+  const focusSearchInput = ({ immediate = false } = {}) => {
+    const focusElement = () => {
+      if (!searchInputRef.current) {
+        return false
+      }
+      searchInputRef.current.focus({ preventScroll: true })
+      if (searchInputRef.current.setSelectionRange) {
+        const cursorPosition = searchInputRef.current.value?.length ?? 0
+        searchInputRef.current.setSelectionRange(cursorPosition, cursorPosition)
+      }
+      return true
+    }
+
+    if (immediate) {
+      if (!focusElement()) {
+        // Fallback in case ref isn't ready yet
+        focusSearchInput()
+      }
+      return
+    }
+
     if (typeof window === 'undefined' || typeof window.requestAnimationFrame !== 'function') {
-      searchInputRef.current?.focus()
+      focusElement()
       return
     }
 
@@ -266,7 +286,7 @@ function CategoryScreen() {
 
     focusAnimationFrame.current = window.requestAnimationFrame(() => {
       focusAnimationFrame.current = window.requestAnimationFrame(() => {
-        searchInputRef.current?.focus({ preventScroll: true })
+        focusElement()
       })
     })
   }
@@ -280,8 +300,10 @@ function CategoryScreen() {
       } else {
         setIsSearchOpen(true)
       }
+      focusSearchInput({ immediate: true })
+      return
     }
-    focusSearchInput()
+    focusSearchInput({ immediate: true })
   }
 
   useEffect(() => {
