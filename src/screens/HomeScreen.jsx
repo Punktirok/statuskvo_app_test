@@ -229,7 +229,7 @@ function HomeScreen() {
                 <div className="rounded-[20px] bg-surface-card px-4 py-2 shadow-card">
                 <div className="custom-divide [&>*:last-child]:pb-1.5">
                     {/* Перебираем первые шесть категорий и показываем их построчно */}
-                    {secondaryCategories.slice(0, 8).map(({ title, iconKey }) => {
+                    {secondaryCategories.slice(0, 7).map(({ title, iconKey }) => {
                       const iconSrc = getCategoryIcon(iconKey)
                       return (
                         <button
@@ -268,12 +268,12 @@ function HomeScreen() {
                 </div>
 
                 {/* Дополнительная карточка категорий, если элементов больше */}
-                {secondaryCategories.length > 8 && (
+                {secondaryCategories.length > 7 && (
                   <div className="rounded-[20px] bg-surface-card px-4 py-2 shadow-card">
                     {/* Если категорий много, показываем вторую карточку — пользователю понятно, что это продолжение списка */}
                     <div className="custom-divide [&>*:last-child]:pb-1.5">
                       {/* Остальные категории попадают во вторую группу */}
-                      {secondaryCategories.slice(8).map(({ title, iconKey }) => {
+                      {secondaryCategories.slice(7).map(({ title, iconKey }) => {
                         const iconSrc = getCategoryIcon(iconKey)
                         return (
                           <button

@@ -1,12 +1,10 @@
 import { STATIC_CATEGORIES } from '../data/categories.js'
 import { LESSONS_ENDPOINT, NEW_CATEGORY_TITLE } from './config.js'
 import { readCache, writeCache } from '../utils/cache.js'
-import { getNextMoscowTime, isWithinMoscowWindow } from '../utils/time.js'
 
 let lessonUid = 0
 const LESSONS_CACHE_KEY = 'lessons-cache-v2'
-const LESSONS_UPDATE_START = 10
-const LESSONS_UPDATE_END = 11
+const LESSONS_CACHE_TTL_MS = 60 * 60 * 1000
 const CACHE_MODE_STORAGE_KEY = 'lessons-cache-mode'
 const CACHE_MODE_QUERY_PARAM = 'cache'
 
@@ -115,9 +113,28 @@ const toLessonsByCategoryMap = (rawData) => {
   return {}
 }
 
+const parseNumericLessonId = (value) => {
+  if (value == null) {
+    return null
+  }
+  const direct = Number(value)
+  if (Number.isFinite(direct)) {
+    return direct
+  }
+  const match = String(value).match(/(\d+)/)
+  if (match) {
+    const extracted = Number(match[1])
+    if (Number.isFinite(extracted)) {
+      return extracted
+    }
+  }
+  return null
+}
+
 const buildNormalizedLessons = (rawInput) => {
   const rawLessonsByCategory = toLessonsByCategoryMap(rawInput)
   const result = {}
+  let fallbackOrderCounter = 0
 
   const addLessonToCategory = (categoryTitle, lesson) => {
     if (!categoryTitle) return
@@ -140,6 +157,8 @@ const buildNormalizedLessons = (rawInput) => {
       const baseId = createLessonId(rawLesson)
       const tags = parseTags(rawLesson.tags)
       const folderTitle = resolveFolderTitle(rawLesson)
+      const parsedOrder = parseNumericLessonId(baseId)
+      const orderValue = parsedOrder ?? fallbackOrderCounter++
       const baseLesson = {
         ...rawLesson,
         baseId,
@@ -147,6 +166,7 @@ const buildNormalizedLessons = (rawInput) => {
         tags,
         primaryCategoryTitle,
         folderTitle,
+        orderValue,
       }
 
       addLessonToCategory(primaryCategoryTitle, {
@@ -180,7 +200,7 @@ const buildNormalizedLessons = (rawInput) => {
   return Object.fromEntries(
     Object.entries(result).map(([categoryTitle, lessons]) => [
       categoryTitle,
-      [...lessons].reverse(),
+      [...lessons].sort((a, b) => (b.orderValue ?? 0) - (a.orderValue ?? 0)),
     ]),
   )
 }
@@ -266,16 +286,13 @@ const shouldBypassCache = () => resolveCacheMode() === CACHE_MODES.NETWORK
 const loadAllLessons = async () => {
   const now = Date.now()
   const bypassCache = shouldBypassCache()
-  const forceRefresh =
-    bypassCache || isWithinMoscowWindow(LESSONS_UPDATE_START, LESSONS_UPDATE_END)
-  if (!bypassCache && !forceRefresh && inMemoryLessons && inMemoryLessons.expiresAt > now) {
+  if (!bypassCache && inMemoryLessons && inMemoryLessons.expiresAt > now) {
     return inMemoryLessons
   }
 
   if (!bypassCache) {
     const cached = readCache(LESSONS_CACHE_KEY)
     if (
-      !forceRefresh &&
       cached &&
       cached.expiresAt &&
       cached.expiresAt > now &&
@@ -297,7 +314,7 @@ const loadAllLessons = async () => {
   const normalized = {
     lessonsByCategory,
     timestamp: Date.now(),
-    expiresAt: getNextMoscowTime(LESSONS_UPDATE_START),
+    expiresAt: now + LESSONS_CACHE_TTL_MS,
   }
 
   if (!bypassCache) {
