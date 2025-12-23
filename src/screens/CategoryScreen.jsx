@@ -148,16 +148,11 @@ function CategoryScreen() {
     return titles
   }, [lessons])
 
-  const sortedLessons = useMemo(
-    () => (sortOrder === 'desc' ? filteredLessons : [...filteredLessons].reverse()),
-    [filteredLessons, sortOrder],
-  )
-
   const { folderEntries, folderMap, lessonsWithoutFolders } = useMemo(() => {
     const map = new Map()
     const withoutFolders = []
 
-    sortedLessons.forEach((lesson) => {
+    filteredLessons.forEach((lesson) => {
       const folderTitle = normalizeFolderTitle(lesson.folderTitle)
       if (!folderTitle) {
         withoutFolders.push(lesson)
@@ -178,12 +173,24 @@ function CategoryScreen() {
         count: folderLessons.length,
       })),
     }
-  }, [sortedLessons])
+  }, [filteredLessons])
 
-  const activeFolderLessons = activeFolder ? folderMap.get(activeFolder) ?? [] : []
-  const visibleLessons = activeFolder ? activeFolderLessons : lessonsWithoutFolders
+  const sortedLessonsWithoutFolders = useMemo(
+    () => (sortOrder === 'desc' ? lessonsWithoutFolders : [...lessonsWithoutFolders].reverse()),
+    [lessonsWithoutFolders, sortOrder],
+  )
+
+  const sortedActiveFolderLessons = useMemo(() => {
+    if (!activeFolder) {
+      return []
+    }
+    const lessonsInFolder = folderMap.get(activeFolder) ?? []
+    return sortOrder === 'desc' ? lessonsInFolder : [...lessonsInFolder].reverse()
+  }, [activeFolder, folderMap, sortOrder])
+
+  const visibleLessons = activeFolder ? sortedActiveFolderLessons : sortedLessonsWithoutFolders
   const shouldRenderLessonList =
-    activeFolder || lessonsWithoutFolders.length > 0 || folderEntries.length === 0
+    activeFolder || sortedLessonsWithoutFolders.length > 0 || folderEntries.length === 0
   const showFolders = !activeFolder && folderEntries.length > 0
   const screenTitle = activeFolder || decodedCategoryName
 
